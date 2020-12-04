@@ -1,0 +1,120 @@
+.outer-header-container {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  border-bottom: 1px solid #c7c7c7;
+  background-color: white;
+  z-index: 100;
+}
+
+.inner-header-container {
+  width: 1200px;
+  max-width: 100%;
+  margin: auto;
+}
+
+.header {
+  height: 75px;
+  width: 100%;
+  display: flex;
+  .left-header {
+    display: flex;
+    width: 60%;
+    justify-content: space-between;
+    align-items: center;
+    .search-box {
+      display: flex;
+      height: 40px;
+      width: 450px;
+      border: 1px solid #c7c7c7;
+      border-radius: 24px;
+      transition: all ease 250ms;
+      &:hover {
+        border-color: #0e81ce96;
+      }
+      input {
+        width: 100%;
+        padding: 0 15px;
+        outline: none;
+        border: none;
+        font-size: 18px;
+        color: #595959;
+        background-color: transparent;
+      }
+      i {
+        background-color: transparent;
+        padding-right: 15px;
+        margin: auto;
+        transform: scale(1.4);
+        cursor: pointer;
+        &:hover {
+          color: #0e81ce96;
+        }
+      }
+    }
+  }
+  .right-header {
+    display: flex;
+    width: 40%;
+    justify-content: flex-end;
+    align-items: center;
+
+    .box-icon {
+      width: 60px;
+      height: 60px;
+      margin-left: 100px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      &:hover {
+        border-radius: 30px;
+        background-color: #f3f3f3;
+      }
+    }
+
+    i {
+      transform: scale(1.7);
+    }
+  }
+  .dropdown-login {
+    background-color: white;
+    position: absolute;
+    transform: translateX(-45%);
+    top: 80px;
+    width: 300px;
+    padding: 10px;
+    border-radius: 7px 0 7px 7px;
+    box-shadow: 0 0 6px 0px #999999;
+    user-select: none;
+  }
+  .dropdown-item {
+    display: flex;
+    height: 50px;
+    align-items: center;
+    padding: 10px 15px;
+    text-align: center;
+    font-size: 18px;
+    border-radius: 5px;
+    transition: background-color 300ms;
+    cursor: pointer;
+    &:hover {
+      background-color: #f3f3f3;
+    }
+  }
+  .dropdown-menu {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    transform: translateX(-36%);
+    top: 80px;
+    width: 300px;
+    padding: 10px;
+    border-radius: 7px;
+    box-shadow: 0 0 6px 0px #999999;
+  }
+  .title-dropdown-menu {
+    font-size: 22px;
+    cursor: pointer;
+  }
+}

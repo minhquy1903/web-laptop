@@ -1,25 +1,33 @@
-import logo from './logo.svg';
+import React from 'react';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
+import Main from './components/Main/Main';
+import Banner from './components/Banner/Banner';
+import SlideProduct from './components/SlideProduct/SlideProduct';
+
 import './App.css';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='container'>
+      <Header />
+      <Main>
+        <div className='home-page'>
+          <Banner />
+          <SlideProduct
+            titleListProduct={'Giảm giá sốc'}
+            url={'/api/product/laptop/home/on-sale'}
+          />
+          <SlideProduct
+            titleListProduct={'Hàng mới về'}
+            url={'/api/product/laptop/home/incoming'}
+          />
+        </div>
+      </Main>
+      <Footer />
     </div>
   );
-}
+};
 
 export default App;
