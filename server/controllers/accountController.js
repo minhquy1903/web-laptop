@@ -37,25 +37,33 @@ const updateInfo = async (req, res) => {
 };
 
 const login = async (req, res) => {
-  console.log(req.body);
-
   const username = req.body.username;
   const password = req.body.password;
 
   const user = await Account.findOne({ username: username });
-
   if (user === null) return res.json({ result: 'NOT_FOUND' });
   console.log('pass');
   if ((await bcrypt.compare(password, user.password)) === true) {
-    const user = { username: username, password: password };
+    const infoUser = {
+      username: user.username,
+      name: user.name,
+      address: user.address,
+      phone: user.phone,
+      email: user.email,
+      type: user.type,
+    };
+    const userJwt = { username: username, password: password };
 
-    const accessToken = jwt.sign(user, accessTokenSecret);
-    res.status(200).json({ accessToken: accessToken, result: 'SUCCESS' });
+    const accessToken = jwt.sign(userJwt, accessTokenSecret);
+    res.status(200).json({
+      accessToken: accessToken,
+      result: 'SUCCESS',
+      infoUser: infoUser,
+    });
   } else res.json({ result: 'NOT_FOUND' });
 };
 
 const register = async (req, res) => {
-  console.log(req.body);
   if ((await Account.findOne({ username: req.body.username })) !== null)
     return res.status(400).json('user has taken');
   const username = req.body.username;

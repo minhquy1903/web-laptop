@@ -9,7 +9,7 @@ const Register = () => {
 
   const register = async () => {
     try {
-      const response = await axios.post('/account/register', {
+      const response = await axios.post('api/account/register', {
         username: username,
         password: password,
         info: {

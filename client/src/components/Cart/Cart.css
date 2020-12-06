@@ -1,0 +1,155 @@
+.container__cart {
+  margin: auto;
+
+  font-family: tahoma;
+  width: 1200px;
+}
+
+.container__cart--title {
+  margin-bottom: 20px;
+}
+
+.container__cart__wrap {
+  display: flex;
+  flex-wrap: wrap;
+  border: 1px solid #e3e7ef;
+}
+
+/* LEFT-STAR */
+.col__left {
+  width: calc(100% - 310px);
+}
+
+.cart__list {
+  list-style: none;
+}
+
+.item {
+  border-bottom: 1px solid #e3e7ef;
+  display: flex;
+  padding: 16px;
+}
+
+.item:last-child {
+  border-bottom: 0px;
+}
+
+.item__avatar {
+  /* position: relative; */
+  width: 168px;
+  height: 168px;
+}
+.item__avatar .avatar {
+  width: 168px;
+  height: 168px;
+  /* position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto; */
+}
+
+.item__content {
+  font-size: 14px;
+  margin-left: 24px;
+  max-width: 400px;
+}
+
+.content {
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+
+.btn__xoa {
+  margin-top: 8px;
+}
+
+.btn__xoa a {
+  color: #7a8088;
+  text-decoration: none;
+}
+
+.btn__xoa a:active {
+  color: #7a8088;
+}
+
+.item__price {
+  flex-grow: 1;
+  text-align: right;
+}
+
+.price {
+  margin-top: 4px;
+  font-size: 18px;
+}
+
+/* LEFT-END */
+
+/* RIGHT-START */
+.col__right {
+  border-left: 1px solid #e3e7ef;
+  padding: 16px;
+  width: 310px;
+}
+
+.price__temporary {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #e3e7ef;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+}
+
+.price__total__container {
+  list-style: none;
+}
+
+.price__total {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.total {
+  color: red;
+  font-weight: bold;
+}
+
+.btn_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.btn__calculation {
+  text-decoration: none;
+  color: white;
+  background-color: #06c1d4;
+  font-weight: 400;
+  border-radius: 56px;
+  height: 48px;
+  display: block;
+  padding: 0 48px;
+  line-height: 48px;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.btn__calculation:hover {
+  filter: brightness(1.2);
+}
+
+.btn__calculation.ani {
+  background-color: white;
+  color: black;
+  border: 1px solid gray;
+  transition: 300ms;
+}
+
+.btn__calculation.ani:hover {
+  background-color: #2c95a0;
+  color: white;
+}
+/* RIGHT-END */

@@ -2,12 +2,6 @@ import React from 'react';
 
 import './ProductItem.scss';
 
-const formatter = new Intl.NumberFormat('en-US', {
-  style: 'currency',
-  currency: 'USD',
-  minimumFractionDigits: 2,
-});
-
 export default function ProductItem({ product }) {
   return (
     <div className='product-item-container'>
@@ -24,6 +18,7 @@ export default function ProductItem({ product }) {
           <h3 className='product-name'>{product.name}</h3>
           <div className='sku-code'>SKU: {product.productID}</div>
           <div className='price'>Price: {product.price}đ</div>
+          <button>Thêm vào giỏ hàng</button>
         </div>
       </div>
     </div>

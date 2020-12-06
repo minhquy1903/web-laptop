@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import LoginAndRegister from '../LoginAndRegister/LoginAndRegister';
 import Dropdown from './Dropdown';
@@ -8,7 +9,6 @@ import './Header.scss';
 import icon from './icons';
 const Header = () => {
   const [openLoginForm, setOpenLoginForm] = useState(false);
-  const [openDropdownLogin, setOpenDropdownLogin] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(false);
   console.log(openDropdown);
   return (
@@ -16,10 +16,12 @@ const Header = () => {
       <div className='inner-header-container'>
         <header className='header'>
           <div className='left-header'>
-            <div className='logo'>
-              LOGO
-              <img src='logo.png' alt='' />
-            </div>
+            <Link to='/'>
+              <div className='logo'>
+                LOGO
+                <img src='logo.png' alt='' />
+              </div>
+            </Link>
 
             <Dropdown
               openDropdown={openDropdown}
@@ -35,19 +37,16 @@ const Header = () => {
             <SearchBox />
           </div>
           <div className='right-header'>
-            <HeaderItem iconLink={icon.cartIcon} />
-            <HeaderItem
-              openDropdownLogin={openDropdownLogin}
-              setOpenDropdownLogin={setOpenDropdownLogin}
-              iconLink={icon.userIcon}>
-              <DropdownLogin>
-                <DropdownItem
-                  name={'Login'}
-                  setOpenLoginForm={setOpenLoginForm}
-                  closeDropdownAccount={() => setOpenDropdownLogin(false)}
-                />
-              </DropdownLogin>
-            </HeaderItem>
+            <div className='box-icon'>
+              <Link to='/cart'>
+                <i className={icon.cartIcon} i />
+              </Link>
+            </div>
+            <div className='box-icon'>
+              <i
+                className={icon.userIcon}
+                onClick={() => setOpenLoginForm(!openLoginForm)}></i>
+            </div>
           </div>
         </header>
         <Modal
@@ -55,7 +54,11 @@ const Header = () => {
           closeModal={() => {
             setOpenLoginForm(false);
           }}>
-          <LoginAndRegister />
+          <LoginAndRegister
+            closeModal={() => {
+              setOpenLoginForm(false);
+            }}
+          />
         </Modal>
       </div>
     </div>
@@ -63,22 +66,6 @@ const Header = () => {
 };
 
 export default Header;
-
-const HeaderItem = ({
-  openDropdownLogin,
-  setOpenDropdownLogin,
-  iconLink,
-  children,
-}) => {
-  return (
-    <div className='box-icon'>
-      <i
-        className={iconLink}
-        onClick={() => setOpenDropdownLogin(!openDropdownLogin)}></i>
-      {openDropdownLogin && children}
-    </div>
-  );
-};
 
 const DropdownItem = ({ name, setOpenLoginForm, closeDropdownAccount }) => {
   return (
@@ -91,7 +78,4 @@ const DropdownItem = ({ name, setOpenLoginForm, closeDropdownAccount }) => {
       {name}
     </div>
   );
-};
-const DropdownLogin = ({ children }) => {
-  return <div className='dropdown-login'>{children}</div>;
 };

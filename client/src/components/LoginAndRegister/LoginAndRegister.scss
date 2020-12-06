@@ -1,6 +1,6 @@
 .login-register-container {
   background-color: white;
-  width: 450px;
+  width: 410px;
   border-radius: 8px;
 
   .header-login-register {
@@ -11,7 +11,6 @@
     width: 100%;
     margin: auto;
     height: 80px;
-    font-weight: 600;
 
     div {
       padding-top: 24px;
@@ -21,6 +20,8 @@
       cursor: pointer;
       user-select: none;
       border-bottom: 2px solid #e6e6e6;
+
+      font-weight: 600;
     }
     .login-form-selected {
       border-bottom: 2px solid #00aaff;
@@ -29,7 +30,7 @@
   .login-register-form {
     margin: 40px auto;
     width: 90%;
-    padding-bottom: 20px;
+    padding-bottom: 10px;
 
     .login-container,
     .register-container {
@@ -69,10 +70,23 @@
           padding-top: 10px;
         }
       }
+      .remember-me {
+        display: flex;
+        height: 30px;
+        font-size: 18px;
+        align-items: center;
+        padding-bottom: 25px;
+        margin-bottom: 5px;
+        cursor: pointer;
+        input {
+          display: block;
+          width: 18px;
+          height: 18px;
+          margin-right: 7px;
+        }
+      }
       button {
         cursor: pointer;
-        margin-top: 20px;
-
         height: 50px;
         width: 100%;
         outline: none;
@@ -84,6 +98,24 @@
         transition: filter 250ms;
         &:hover {
           filter: brightness(1.2);
+        }
+      }
+      .register-btn {
+        margin: 20px 0;
+      }
+      .forgot-password {
+        height: 80px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        span {
+          text-decoration: underline;
+          font-size: 20px;
+          color: #00aaff;
+          cursor: pointer;
+          &:hover {
+            color: red;
+          }
         }
       }
     }

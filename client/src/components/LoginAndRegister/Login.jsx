@@ -1,20 +1,23 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const Login = () => {
+const Login = ({ closeModal }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [statusLogin, setStatusLogin] = useState(true);
 
   const login = async () => {
     try {
-      const res = await axios.post('/account/login', {
+      const res = await axios.post('api/account/login', {
         username: username,
         password: password,
       });
       if (res.data.result === 'NOT_FOUND') setStatusLogin(false);
       if (res.data.result === 'SUCCESS') {
+        closeModal();
+        const infoUser = JSON.stringify(res.data.infoUser);
         localStorage.setItem('accessToken', res.data.accessToken);
+        localStorage.setItem('infoUser', infoUser);
       }
     } catch (error) {
       console.error(error);
@@ -43,10 +46,17 @@ const Login = () => {
           <div className='notice-login'>Username or password is incorrect</div>
         )}
       </div>
-
+      <div className='remember-me'>
+        <input type='checkbox' name='remember-me' />
+        <label htmlFor='checkbox'>Remember me</label>
+      </div>
       <button className='login-btn' onClick={() => login()}>
         Login
       </button>
+
+      <div className='forgot-password'>
+        <span>I forgot my password?</span>
+      </div>
     </div>
   );
 };

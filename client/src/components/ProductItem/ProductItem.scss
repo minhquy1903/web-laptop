@@ -11,6 +11,7 @@
       margin-bottom: 40px;
       img {
         width: 100%;
+        object-fit: cover;
       }
     }
     .bottom-content {
@@ -37,12 +38,12 @@
         padding-top: 10px;
       }
     }
+
+    .content-more {
+      display: none;
+    }
   }
   &:hover {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   }
-}
-
-.list-product-container {
-  display: flex;
 }

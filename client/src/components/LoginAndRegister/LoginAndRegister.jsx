@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Login from './Login';
 import Register from './Register';
 import './LoginAndRegister.scss';
-const LoginAndRegister = () => {
+const LoginAndRegister = ({ closeModal }) => {
   let [open, setOpen] = useState({
     isLoginOpen: true,
     isRegisterOpen: false,
@@ -31,7 +31,7 @@ const LoginAndRegister = () => {
         </div>
       </div>
       <div className='login-register-form'>
-        {open.isLoginOpen && <Login />}
+        {open.isLoginOpen && <Login closeModal={closeModal} />}
         {open.isRegisterOpen && <Register />}
       </div>
     </div>
