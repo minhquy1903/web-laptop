@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 import Main from '../Main/Main';
 
@@ -44,12 +45,12 @@ const CheckouSideBar = ({ total }) => {
             <div className='total'>{total} ₫</div>
           </li>
           <li className='btn_container'>
-            <a href='' className='btn__calculation'>
+            <Link href='' className='btn__calculation'>
               Tiến hành đặt hàng
-            </a>
-            <a href='' className='btn__calculation ani'>
+            </Link>
+            <Link href='' className='btn__calculation ani'>
               Tính trả góp
-            </a>
+            </Link>
           </li>
         </ul>
       </div>
@@ -64,6 +65,7 @@ const ProductCartItem = ({ product }) => {
         <img
           className='avatar'
           src='https://admin.thinkpro.vn//backend/uploads/product/avatar/2020/7/15/dell-latitude-7480-Latitude748008NU-medium.jpg'
+          alt='hinh laptop'
         />
       </div>
       {/* item__avatar */}

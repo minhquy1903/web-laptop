@@ -20,28 +20,28 @@ export default function Banner() {
           <SwiperSlide>
             <img
               src='https://admin.thinkpro.vn//backend/uploads/banner/2020/11/24/2x-thinkpro-black-friday-sale-light.jpg'
-              alt=''
+              alt='img-banner'
               className='img'
             />
           </SwiperSlide>
           <SwiperSlide>
             <img
               src='https://admin.thinkpro.vn//backend/uploads/banner/2020/11/9/2x-thinkpro-msi-banner-web-2610.jpg'
-              alt=''
+              alt='img-banner'
               className='img'
             />
           </SwiperSlide>
           <SwiperSlide>
             <img
               src='https://admin.thinkpro.vn//backend/uploads/banner/2020/11/25/2x-service-banner2.jpg'
-              alt=''
+              alt='img-banner'
               className='img'
             />
           </SwiperSlide>
           <SwiperSlide>
             <img
               src='https://admin.thinkpro.vn//backend/uploads/banner/2020/11/19/sieu-bao-khuyen-mai-thinkpad-x1-carbon.jpg'
-              alt=''
+              alt='img-banner'
               className='img'
             />
           </SwiperSlide>

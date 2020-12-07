@@ -26,6 +26,7 @@ const SlideProduct = ({ url, titleListProduct }) => {
 
   useEffect(() => {
     getInfoProducts();
+    return () => setInfoProducts();
   }, []);
 
   return (
@@ -40,10 +41,10 @@ const SlideProduct = ({ url, titleListProduct }) => {
           navigation
           onSlideChange={() => console.log('slide change')}
           onSwiper={(swiper) => console.log(swiper)}>
-          {infoProducts.map((product) => {
+          {infoProducts.map((product, i) => {
             return (
-              <SwiperSlide>
-                <ProductItem product={product} />
+              <SwiperSlide key={i}>
+                <ProductItem key={i} product={product} />
               </SwiperSlide>
             );
           })}

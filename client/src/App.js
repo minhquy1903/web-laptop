@@ -5,6 +5,7 @@ import HomePage from './components/HomePage/HomePage';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import Cart from './components/Cart/Cart';
+import Account from './components/Account/Account';
 
 import './App.css';
 
@@ -16,6 +17,7 @@ const App = () => {
         <Switch>
           <Route path='/' component={HomePage} exact />
           <Route path='/cart' component={Cart} />
+          <Route path='/account' component={Account} />
         </Switch>
         <Footer />
       </Router>

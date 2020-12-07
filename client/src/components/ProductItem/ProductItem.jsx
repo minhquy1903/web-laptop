@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 import './ProductItem.scss';
 
 export default function ProductItem({ product }) {
@@ -8,9 +8,9 @@ export default function ProductItem({ product }) {
       <div className='wrap-product-item'>
         <div className='top-content'>
           <div className='image-container'>
-            <a href='#'>
+            <Link to='#'>
               <img alt='hinh-laptop' src={product.images[0]} />
-            </a>
+            </Link>
           </div>
         </div>
 

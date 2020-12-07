@@ -23,7 +23,6 @@ const getDetailProduct = async (req, res) => {
 const getOnSaleProduct = async (req, res) => {
   const products = await productModel.find({ status: 'on_sale' });
 
-  console.log(products[1]);
   res.json(products);
 };
 

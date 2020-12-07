@@ -7,7 +7,7 @@ router.get('/', accountController.getAccount);
 
 router.put('/update/password/:username', accountController.updatePassword);
 
-router.put('/update/info/:username', accountController.updateInfo);
+router.put('/update/infomation/:username', accountController.updateInfomation);
 
 router.post('/login', accountController.login);
 

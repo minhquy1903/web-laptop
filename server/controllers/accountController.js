@@ -21,16 +21,15 @@ const updatePassword = async (req, res) => {
   res.json('updated!!!');
 };
 
-const updateInfo = async (req, res) => {
+const updateInfomation = async (req, res) => {
+  console.log('ayyy yoh mother fucker');
   await Account.updateOne(
     { username: req.params.username },
     {
-      info: {
-        name: req.body.name,
-        address: req.body.address,
-        phone: req.body.phone,
-        email: req.body.email,
-      },
+      name: req.body.name,
+      address: req.body.address,
+      phone: req.body.phone,
+      email: req.body.email,
     },
   );
   res.json('updated!!!');
@@ -42,7 +41,6 @@ const login = async (req, res) => {
 
   const user = await Account.findOne({ username: username });
   if (user === null) return res.json({ result: 'NOT_FOUND' });
-  console.log('pass');
   if ((await bcrypt.compare(password, user.password)) === true) {
     const infoUser = {
       username: user.username,
@@ -52,6 +50,7 @@ const login = async (req, res) => {
       email: user.email,
       type: user.type,
     };
+
     const userJwt = { username: username, password: password };
 
     const accessToken = jwt.sign(userJwt, accessTokenSecret);
@@ -93,4 +92,10 @@ const getAccount = async (req, res) => {
   res.json(accounts);
 };
 
-module.exports = { updatePassword, updateInfo, login, register, getAccount };
+module.exports = {
+  updatePassword,
+  updateInfomation,
+  login,
+  register,
+  getAccount,
+};

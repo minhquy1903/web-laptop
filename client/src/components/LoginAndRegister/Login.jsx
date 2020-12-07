@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const Login = ({ closeModal }) => {
+const Login = ({ closeModal, login, setLogin }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [statusLogin, setStatusLogin] = useState(true);
 
-  const login = async () => {
+  const loginHandle = async () => {
     try {
       const res = await axios.post('api/account/login', {
         username: username,
@@ -18,6 +18,7 @@ const Login = ({ closeModal }) => {
         const infoUser = JSON.stringify(res.data.infoUser);
         localStorage.setItem('accessToken', res.data.accessToken);
         localStorage.setItem('infoUser', infoUser);
+        setLogin(true);
       }
     } catch (error) {
       console.error(error);
@@ -50,7 +51,7 @@ const Login = ({ closeModal }) => {
         <input type='checkbox' name='remember-me' />
         <label htmlFor='checkbox'>Remember me</label>
       </div>
-      <button className='login-btn' onClick={() => login()}>
+      <button className='login-btn' onClick={() => loginHandle()}>
         Login
       </button>
 

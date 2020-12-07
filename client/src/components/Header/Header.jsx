@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import LoginAndRegister from '../LoginAndRegister/LoginAndRegister';
@@ -10,7 +10,16 @@ import icon from './icons';
 const Header = () => {
   const [openLoginForm, setOpenLoginForm] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(false);
-  console.log(openDropdown);
+  const [login, setLogin] = useState(false);
+
+  useEffect(() => {
+    const user = localStorage.getItem('infoUser'); // Xu li localStorage
+    console.log(user);
+    if (user !== null && user !== undefined) setLogin(true);
+
+    return () => setLogin(false);
+  }, []);
+
   return (
     <div className='outer-header-container'>
       <div className='inner-header-container'>
@@ -43,9 +52,16 @@ const Header = () => {
               </Link>
             </div>
             <div className='box-icon'>
-              <i
-                className={icon.userIcon}
-                onClick={() => setOpenLoginForm(!openLoginForm)}></i>
+              {login ? (
+                <Link to='/account'>
+                  <i className={icon.userIcon} />
+                </Link>
+              ) : (
+                <i
+                  className={icon.userIcon}
+                  onClick={() => setOpenLoginForm(!openLoginForm)}
+                />
+              )}
             </div>
           </div>
         </header>
@@ -58,6 +74,8 @@ const Header = () => {
             closeModal={() => {
               setOpenLoginForm(false);
             }}
+            login={login}
+            setLogin={setLogin}
           />
         </Modal>
       </div>
