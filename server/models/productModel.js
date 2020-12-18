@@ -18,7 +18,7 @@ const Product = Schema({
     memory: String,
     hardDrive: String,
     color: String,
-    weight: Number,
+    weight: String,
     battery: String,
     ports: String,
   },
@@ -30,11 +30,18 @@ const Product = Schema({
 
   reviews: {
     comments: {
-      userID: Number,
+      commentID: mongoose.Types.ObjectId(),
+      username: {
+        required: true,
+        type: String,
+      },
+      name: String,
       content: String,
       createdTime: Date,
-      children: [],
+      parentCommentID: String,
+      type: Array,
     },
+
     star: Number,
   },
   description: {

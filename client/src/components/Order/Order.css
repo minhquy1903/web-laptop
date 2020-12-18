@@ -1,0 +1,363 @@
+#main__order {
+  padding-top: 20px;
+  font-family: tahoma;
+}
+
+.container__order {
+  width: 1200px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.container__order__title {
+  margin-bottom: 20px;
+}
+
+.container__order__wrap {
+  display: flex;
+  flex-wrap: wrap;
+  /* border: 1px solid #e3e7ef; */
+}
+
+.order__col__left {
+  width: calc(100% - 310px);
+  padding: 27px 24px 20px;
+  border: 1px solid #e3e7ef;
+}
+
+.form {
+  width: 770px;
+}
+.sex {
+  margin-bottom: 8px;
+}
+
+.check__box {
+  /* height: 25px;
+    width: 80px;
+    display: inline-block; */
+  /* margin-right: px; */
+  /* margin-bottom: 8px; */
+  /* padding-left: 28px; */
+  /* position: relative; */
+  /* cursor: pointer; */
+  display: inline-block;
+  position: relative;
+  padding-left: 30px;
+  margin-right: 10px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  user-select: none;
+  font-size: 16px;
+}
+
+/* .check__box__text{
+    padding-left: 24px;
+    display: inline-block;
+    position: absolute;
+    font-size: 16px;
+    line-height: 20px;
+} */
+
+.check__box input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.check__border {
+  /* position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    border: 2px solid #000;
+    border-radius: 50%;
+    cursor: pointer;
+    background-color: #06C1D4; */
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: white;
+  border: 2px solid black;
+  border-radius: 50%;
+}
+
+.check__box:hover input ~ .check__border {
+  /* background-color: #ccc; */
+}
+
+.check__box input:checked ~ .check__border {
+  background-color: #06c1d4;
+}
+
+.check__border:after {
+  content: '';
+  position: absolute;
+  display: none;
+}
+
+.check__box input:checked ~ .check__border:after {
+  display: block;
+}
+
+.check__box .check__border:after {
+  left: 5px;
+  top: 2px;
+  width: 5px;
+  height: 8px;
+  border: solid #000;
+  border-width: 0px 2px 2px 0px;
+  transform: rotate(45deg);
+}
+
+.container__address__select {
+  padding-right: 20px;
+}
+
+.container__address__select div {
+  padding: 20px;
+  background-color: #fbfbfb;
+}
+
+.address__radio {
+  display: block;
+}
+
+.row__info {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.col__info__6 {
+  width: 50%;
+  padding-right: 20px;
+}
+
+.input__wrap input {
+  width: 100%;
+  background-color: #f3f5f8;
+  height: 48px;
+  padding: 10px 16px;
+  border-radius: 4px;
+  font-size: 16px;
+  box-shadow: none;
+  border: 1px solid #f2f2f2;
+  outline: none;
+}
+.input__wrap input:hover,
+.input__wrap input:focus {
+  border: 1px solid #06c1d4;
+}
+
+.col__info__6.warning {
+  margin-bottom: 16px;
+}
+
+.text__war {
+  font-size: 14px;
+  margin-top: 12px;
+  color: #d43b2a;
+}
+
+.col__info__12 {
+  width: 100%;
+  padding-right: 20px;
+  margin-bottom: 16px;
+}
+
+.title__inline {
+  font-weight: bold;
+  margin-bottom: 16px;
+  margin-top: 16px;
+}
+
+.place__taken {
+  margin-bottom: 7px;
+}
+
+.addwidth {
+  width: 160px;
+}
+
+.check__box__request {
+  margin-top: 16px;
+}
+
+.container__checkbox {
+  display: block;
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 14px;
+  font-size: 16px;
+  user-select: none;
+  cursor: pointer;
+}
+
+.check__box__request input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 21px;
+  width: 21px;
+  background-color: white;
+  border: 2px solid black;
+}
+
+.container__checkbox:hover input ~ .checkmark {
+  /* background-color: #ccc; */
+}
+
+.container__checkbox input:checked ~ .checkmark {
+  background-color: #06c1d4;
+}
+
+.checkmark:after {
+  content: '';
+  position: absolute;
+  display: none;
+}
+
+.container__checkbox input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.container__checkbox .checkmark:after {
+  left: 5px;
+  top: 0px;
+  width: 5px;
+  height: 10px;
+  border: solid black;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.btn__bottom {
+  width: 100%;
+  margin-top: 24px;
+}
+
+.btn__order {
+  text-decoration: none;
+  width: 270px;
+  color: white;
+  font-size: 16px;
+  background-color: #06c1d4;
+  font-weight: 400;
+  border-radius: 56px;
+  height: 48px;
+  display: inline-block;
+  padding: 0 40px;
+  line-height: 48px;
+  text-align: center;
+  margin-bottom: 16px;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+.ani__btn__order:hover {
+  transition: 0.5s;
+  filter: brightness(1.2);
+}
+
+.btn__order.ani__btn__online {
+  margin-left: 32px;
+  background-color: white;
+  color: black;
+  border: 1px solid gray;
+  transition: 0.5s;
+}
+
+.btn__order.ani__btn__online:hover {
+  background-color: #2c95a0;
+  color: white;
+}
+
+.order__col__right {
+  width: 310px;
+}
+
+.calculate__sidebar {
+  border: 1px solid #e3e7ef;
+  border-left: 0px;
+  border-bottom: 0px;
+  /* padding: 16px; */
+}
+
+.calculate__sidebar__row {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #e3e7ef;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  padding: 16px;
+  padding-top: 0px;
+  font-size: 14px;
+  /* padding: 0px 16px 16px; */
+}
+
+.calculate__sidebar__row a {
+  font-weight: bold;
+  text-decoration: none;
+  color: black;
+}
+
+.calculate__sidebar__name__product {
+  width: 65%;
+  padding-right: 0px;
+  font-weight: 600;
+}
+
+.color__count__amount {
+  color: #06c1d4;
+}
+
+.calculate__sidebar__price {
+  width: 35%;
+  text-align: right;
+  padding: 0px;
+}
+
+.calculate__sidebar__row__money {
+  border-bottom: 1px solid #e3e7ef;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  padding: 16px;
+  padding-top: 0px;
+  font-size: 14px;
+}
+
+.temporary__money {
+  display: flex;
+  justify-content: space-between;
+}
+
+.discount__money {
+  margin-top: 16px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.calculate__sidebar__total__title__margin {
+  margin-top: 4px;
+}
+
+.calculate__sidebar__total__money {
+  font-size: 18px;
+  color: #d53b2a;
+}
+
+.not__margin {
+  margin-bottom: 0px;
+}

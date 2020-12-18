@@ -17,7 +17,6 @@ const SlideProduct = ({ url, titleListProduct }) => {
   async function getInfoProducts() {
     try {
       const response = await axios.get(url);
-      console.log(response);
       setInfoProducts(response.data);
     } catch (error) {
       console.error(error);
@@ -39,12 +38,12 @@ const SlideProduct = ({ url, titleListProduct }) => {
           spaceBetween={0}
           slidesPerView={5}
           navigation
-          onSlideChange={() => console.log('slide change')}
-          onSwiper={(swiper) => console.log(swiper)}>
+          onSlideChange
+          onSwiper={(swiper) => {}}>
           {infoProducts.map((product, i) => {
             return (
-              <SwiperSlide key={i}>
-                <ProductItem key={i} product={product} />
+              <SwiperSlide>
+                <ProductItem product={product} />
               </SwiperSlide>
             );
           })}

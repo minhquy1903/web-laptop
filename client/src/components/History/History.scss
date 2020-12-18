@@ -1,0 +1,30 @@
+.height {
+  height: 182px;
+}
+
+.right-content {
+  width: 80%;
+  .title {
+    padding-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    p {
+      font-size: 18px;
+    }
+  }
+  .table-container {
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      border-spacing: 0;
+      display: table;
+      tr {
+        th {
+          border: 1px solid #e3e7ef;
+          color: #0e0e0e;
+          padding: 13px 16px;
+        }
+      }
+    }
+  }
+}

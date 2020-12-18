@@ -1,24 +1,53 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import Main from '../Main/Main';
+import { CartContext } from '../Context/Context';
 
 import './Cart.css';
 
 const Cart = () => {
-  useEffect(() => {}, []);
+  const [cart, setCart] = useContext(CartContext);
+  const [total, setTotal] = useState(0);
+
+  const calTotal = () => {
+    let t = 0;
+    cart.forEach((product) => {
+      t += product.price;
+    });
+    setTotal(t);
+  };
+  useEffect(() => {
+    calTotal();
+  }, [cart]);
+
+  const removeItemFromCart = (_id) => {
+    setCart(
+      cart.filter((product) => {
+        return product.id !== _id;
+      }),
+    );
+  };
 
   return (
     <Main>
       <div className='container__cart'>
-        <h1 className='container__cart--title'>Giỏ hàng(1)</h1>
+        <h1 className='container__cart--title'>Giỏ hàng({cart.length})</h1>
         <div className='container__cart__wrap'>
           <div className='col__left'>
             <div className='cart__list'>
-              <ProductCartItem />
+              {cart.map((product) => {
+                return (
+                  <ProductCartItem
+                    key={product.id}
+                    product={product}
+                    removeItemFromCart={removeItemFromCart}
+                  />
+                );
+              })}
             </div>
           </div>
-          <CheckouSideBar />
+          <CheckouSideBar total={total} />
         </div>
       </div>
     </Main>
@@ -45,11 +74,8 @@ const CheckouSideBar = ({ total }) => {
             <div className='total'>{total} ₫</div>
           </li>
           <li className='btn_container'>
-            <Link href='' className='btn__calculation'>
+            <Link to='/order' className='btn__calculation'>
               Tiến hành đặt hàng
-            </Link>
-            <Link href='' className='btn__calculation ani'>
-              Tính trả góp
             </Link>
           </li>
         </ul>
@@ -58,28 +84,28 @@ const CheckouSideBar = ({ total }) => {
   );
 };
 
-const ProductCartItem = ({ product }) => {
+const ProductCartItem = ({ product, removeItemFromCart }) => {
   return (
     <li className='item'>
       <div className='item__avatar'>
-        <img
-          className='avatar'
-          src='https://admin.thinkpro.vn//backend/uploads/product/avatar/2020/7/15/dell-latitude-7480-Latitude748008NU-medium.jpg'
-          alt='hinh laptop'
-        />
+        <img className='avatar' src={product.images[0]} alt='hinh laptop' />
       </div>
       {/* item__avatar */}
       <div className='item__content'>
-        <h3 className='content'>{'product.name'}</h3>
-        <p>SKU: {'product.productID'}</p>
+        <h3 className='content'>{product.name}</h3>
+        <p>SKU: {product.id}</p>
         <div className='btn__xoa'>
-          <button>Xóa</button>
+          <button
+            className='delete-btn'
+            onClick={() => removeItemFromCart(product.id)}>
+            Xóa
+          </button>
         </div>
       </div>
       {/* item__content */}
       <div className='item__price'>
         <div className='price'>
-          <strong> {'product.price'} ₫</strong>
+          <strong> {product.price} ₫</strong>
         </div>
       </div>
       {/* item__price */}

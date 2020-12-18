@@ -13,16 +13,19 @@ async function hashPassword(_password) {
 }
 
 const updatePassword = async (req, res) => {
-  const password = await hashPassword(req.body.password);
+  const user = await Account.findOne({ username: req.params.username });
+  if ((await bcrypt.compare(req.body.currentPassword, user.password)) === false)
+    return res.status(200).json({ result: 'INCORRECT_PASSWORD' });
+  const newPassword = await hashPassword(req.body.confirmPassword);
+
   await Account.updateOne(
     { username: req.params.username },
-    { password: password },
+    { password: newPassword },
   );
-  res.json('updated!!!');
+  return res.status(200).json({ result: 'SUCCESS' });
 };
 
 const updateInfomation = async (req, res) => {
-  console.log('ayyy yoh mother fucker');
   await Account.updateOne(
     { username: req.params.username },
     {
@@ -32,7 +35,7 @@ const updateInfomation = async (req, res) => {
       email: req.body.email,
     },
   );
-  res.json('updated!!!');
+  return res.status(200).json({ result: 'SUCCESS' });
 };
 
 const login = async (req, res) => {

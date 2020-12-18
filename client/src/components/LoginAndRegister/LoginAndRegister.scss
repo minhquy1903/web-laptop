@@ -24,7 +24,7 @@
       font-weight: 600;
     }
     .login-form-selected {
-      border-bottom: 2px solid #00aaff;
+      border-bottom: 2px solid #06c1d4;
     }
   }
   .login-register-form {
@@ -61,7 +61,7 @@
           transition: all 300ms ease;
           &:focus {
             outline: none;
-            box-shadow: 0 0 5px 0.8px #0e81ce96;
+            box-shadow: 0 0 5px 0.8px #06c1d4;
           }
         }
         .notice-login {
@@ -92,7 +92,7 @@
         outline: none;
         border-radius: 25px;
         border: 0;
-        background-color: #00aaff;
+        background-color: #06c1d4;
         font-size: 22px;
         color: white;
         transition: filter 250ms;
@@ -111,7 +111,7 @@
         span {
           text-decoration: underline;
           font-size: 20px;
-          color: #00aaff;
+          color: #06c1d4;
           cursor: pointer;
           &:hover {
             color: red;

@@ -1,0 +1,283 @@
+.container-product-detail {
+  width: 1200px;
+  margin: auto;
+  .product-detail {
+    display: flex;
+    border-bottom: 1px solid #e3e7ef;
+    padding-bottom: 50px;
+
+    .left-content {
+      width: 600px;
+      position: relative;
+      .container-image {
+        width: 100%;
+        height: 100%;
+        img {
+          position: sticky;
+          width: 600px;
+        }
+      }
+    }
+    .right-content {
+      width: 100%;
+      .title-product {
+        padding: 16px;
+        padding-bottom: 0;
+        margin-bottom: 4px;
+        .pd-15 {
+          padding-bottom: 14px;
+        }
+        .code {
+          font-weight: 700;
+        }
+        h1 {
+          padding: 0;
+        }
+        .vote {
+          display: flex;
+          ul {
+            display: flex;
+          }
+          p {
+            padding-left: 30px;
+          }
+        }
+      }
+    }
+    .all-detail {
+      display: flex;
+      justify-content: space-between;
+      .description {
+        padding: 16px;
+        padding-bottom: 0;
+        .brand {
+          padding-bottom: 8px;
+          font-size: 18px;
+        }
+        ul {
+          li {
+            padding-bottom: 8px;
+            font-size: 16px;
+          }
+        }
+        .color {
+          display: flex;
+          flex-direction: column;
+          img {
+            width: 60px;
+            border: 1px solid #06c1d4;
+            border-radius: 3px;
+            margin-top: 8px;
+          }
+        }
+      }
+      .warranty {
+        padding: 16px;
+        border: 1px solid #e3e7ef;
+        border-radius: 6px;
+        ul {
+          padding-top: 8px;
+          padding-left: 16px;
+          li {
+            list-style: disc;
+          }
+        }
+      }
+    }
+  }
+
+  .middle-content {
+    width: 808px;
+    margin: auto;
+    .danhgia-content {
+      padding: 30px 0;
+      border-bottom: 1px solid #e3e7ef;
+
+      h2 {
+        padding-bottom: 30px;
+        span {
+          font-size: 32px;
+          font-weight: 700;
+        }
+      }
+      .advance-disadvance {
+        display: flex;
+        padding: 24px 0;
+        border: 1px solid #e3e7ef;
+        border-radius: 7px;
+        background-color: #fbfbfb;
+        margin-bottom: 40px;
+        h3 {
+          padding-bottom: 16px;
+          font-size: 20px;
+        }
+        .advance {
+          padding: 0 24px;
+          width: 50%;
+          ul {
+            padding-left: 20px;
+            li {
+              list-style: disc;
+              padding-bottom: 6px;
+              font-size: 18px;
+            }
+          }
+        }
+        .disadvance {
+          border-left: 1px solid #e3e7ef;
+        }
+      }
+      .rte {
+        p {
+          margin-bottom: 20px;
+          font-size: 18px;
+        }
+      }
+    }
+    .comment-box {
+      margin-top: 30px;
+      .title {
+        font-size: 32px;
+        margin-bottom: 24px;
+        font-weight: 700;
+        line-height: 1;
+        color: #0e0e0e;
+        .count {
+          font-size: 14px;
+          margin-left: 20px;
+          font-weight: 400;
+        }
+      }
+      .list-comment {
+        .title-comment {
+          padding-bottom: 8px;
+          font-size: 18px;
+        }
+        .comment_textarea {
+          position: relative;
+          font-size: 0;
+          margin-bottom: 28px;
+
+          textarea {
+            background: #f3f5f8;
+            height: 120px;
+            padding: 16px;
+            width: 100%;
+            border: 1px solid #f3f5f8;
+            border-radius: 4px;
+            resize: none;
+            outline: 0;
+            font-size: 18px;
+          }
+          button {
+            width: 63px;
+            text-align: center;
+            height: 36px;
+            background: #06c1d4;
+            border-radius: 56px;
+            border: 0;
+            outline: 0;
+            position: absolute;
+            bottom: 14px;
+            right: 14px;
+            color: #fff;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 700;
+          }
+        }
+
+        .comment-container {
+          .comment {
+            display: flex;
+            margin-bottom: 10px;
+            .avatar {
+              width: 72px;
+              height: 72px;
+              border-radius: 50%;
+              overflow: hidden;
+              margin-right: 16px;
+              line-height: 72px;
+              font-weight: 600;
+              text-align: center;
+              background: #e3e7ef;
+              font-size: 18px;
+              margin-right: 16px;
+
+              img {
+                font-size: 0;
+                line-height: 0;
+                max-width: 100%;
+                height: auto;
+                vertical-align: middle;
+              }
+            }
+            .comment-content {
+              width: 89%;
+              padding-bottom: 18px;
+              .name {
+                font-size: 18px;
+                margin-bottom: 6px;
+                font-weight: 700;
+                display: block;
+              }
+              .comment-text {
+                color: #0e0e0e;
+                margin-bottom: 6px;
+              }
+
+              .comment-bottom {
+                border-bottom: 1px solid #e3e7ef;
+                padding-bottom: 16px;
+                .reply-btn {
+                  cursor: pointer;
+                  color: #06c1d4;
+                }
+                .created-time {
+                  padding-left: 12px;
+                  font-size: 14px;
+                  color: #7a8088;
+                }
+              }
+
+              .comment-textarea {
+                display: flex;
+                display: none;
+                flex-direction: column;
+                align-items: flex-end;
+                textarea {
+                  background: #f3f5f8;
+                  height: 60px;
+                  padding: 16px;
+                  width: 100%;
+                  border: 1px solid #f3f5f8;
+                  border-radius: 4px;
+                  resize: none;
+                  outline: 0;
+                  font-size: 18px;
+                }
+                button {
+                  margin-top: 16px;
+                  width: 63px;
+                  text-align: center;
+                  height: 36px;
+                  background: #06c1d4;
+                  border-radius: 56px;
+                  border: 0;
+                  outline: 0;
+                  color: #fff;
+                  cursor: pointer;
+                  font-size: 16px;
+                  font-weight: 700;
+                }
+              }
+            }
+          }
+          .comment-reply {
+            margin-left: 88px;
+          }
+        }
+      }
+    }
+  }
+}

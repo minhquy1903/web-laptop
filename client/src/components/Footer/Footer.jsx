@@ -8,11 +8,7 @@ const Footer = () => {
       <div className='footer-container'>
         <div className='footer__top'>
           <div className='footer__top__left'>
-            <img
-              className='footer-logo'
-              src='images/logo-thinkpro.PNG'
-              alt='logo'
-            />
+            <img className='footer-logo' src='/images/logo.png' alt='logo' />
           </div>
           <div className='footer__top__right'>
             <div className='information'>
