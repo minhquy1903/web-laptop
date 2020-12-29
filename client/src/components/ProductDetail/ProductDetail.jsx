@@ -1,27 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import queryString from 'query-string';
-
 import Main from '../Main/Main';
 import TopContent from './TopContent';
 import Evaluation from './Evaluation';
 import CommentSection from './CommentSection';
+import productApi from '../../api/productApi';
+
 import './ProductDetail.scss';
 
 const ProductDetail = () => {
   const [productInfomation, setProductInfomation] = useState(null);
 
-  const getDetailInfomationProduct = async (id) => {
-    try {
-      const res = await axios.get(`/api/product/laptop/detail/${id}`);
-      setProductInfomation(res.data);
-      console.log(res.data);
-    } catch (error) {}
-  };
-
   useEffect(() => {
+    const getDetailInfomationProduct = async (id) => {
+      try {
+        const res = await productApi.getDetailProduct(id);
+        console.log(res);
+        setProductInfomation(res);
+      } catch (error) {}
+    };
     const id = queryString.parse(window.location.search);
-    console.log(id.option);
     getDetailInfomationProduct(id.option);
   }, []);
 
@@ -36,8 +34,8 @@ const ProductDetail = () => {
           <Evaluation />
           {productInfomation === null ? null : (
             <CommentSection
-              ListComment={productInfomation.reviews}
-              productID={productInfomation.productID}
+              ListComment={productInfomation.comments}
+              productID={productInfomation._id}
             />
           )}
         </div>

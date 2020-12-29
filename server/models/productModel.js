@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const Product = Schema({
-  productID: {
+  sku: {
     required: true,
     type: String,
   },
@@ -28,22 +28,21 @@ const Product = Schema({
   images: [String],
   warranty: String,
 
-  reviews: {
-    comments: {
-      commentID: mongoose.Types.ObjectId(),
-      username: {
-        required: true,
-        type: String,
-      },
-      name: String,
-      content: String,
-      createdTime: Date,
-      parentCommentID: String,
-      type: Array,
+  comments: {
+    commentID: mongoose.Types.ObjectId(),
+    username: {
+      required: true,
+      type: String,
     },
-
-    star: Number,
+    name: String,
+    content: String,
+    createdTime: Date,
+    parentCommentID: String,
+    type: Array,
   },
+
+  star: Number,
+
   description: {
     title: String,
     content: String,

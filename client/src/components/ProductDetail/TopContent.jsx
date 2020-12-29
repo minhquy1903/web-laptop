@@ -13,7 +13,7 @@ const TopContent = ({ productInfomation }) => {
         <div className='title-product'>
           <h1 className='product-name pd-15'>{productInfomation.name}</h1>
           <div className='code pd-15'>
-            <span>SKU: {productInfomation.productID}</span>
+            <span>SKU: {productInfomation.sku}</span>
           </div>
           <div className='vote'>
             <ul>

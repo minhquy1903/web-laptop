@@ -5,13 +5,14 @@ export default function CommentInput({
   textAreaStyle,
   parentComment,
   productID,
+  setListComment,
 }) {
   const commentText = useRef(null);
-  const sendComment = () => {
+  const sendComment = async () => {
+    if (commentText.current.value.trim() === '') return;
     const user = JSON.parse(localStorage.getItem('infoUser'));
-    console.log(user.name);
     try {
-      const res = axios.post('api/product/comment/add', {
+      const res = await axios.post('api/product/comment/add', {
         username: user.username,
         name: user.name,
         content: commentText.current.value,
@@ -19,7 +20,8 @@ export default function CommentInput({
         productID: productID,
         parentComment: parentComment,
       });
-      console.log(res);
+      commentText.current.value = '';
+      setListComment(res.data);
     } catch (error) {
       console.log(error);
     }
@@ -28,11 +30,22 @@ export default function CommentInput({
   return (
     <>
       <div className='comment_textarea'>
-        <textarea
-          ref={commentText}
-          style={textAreaStyle}
-          placeholder='Mời bạn để lại bình luận'
-        />
+        {textAreaStyle === undefined ? (
+          <textarea
+            ref={commentText}
+            placeholder='Mời bạn để lại bình luận'
+            onKeyPress={(e) => (e.key === 'Enter' ? sendComment() : null)}
+          />
+        ) : (
+          <textarea
+            autoFocus={true}
+            ref={commentText}
+            style={textAreaStyle}
+            placeholder='Mời bạn để lại bình luận'
+            onKeyPress={(e) => (e.key === 'Enter' ? sendComment() : null)}
+          />
+        )}
+
         <button onClick={() => sendComment()}>Gửi</button>
       </div>
     </>

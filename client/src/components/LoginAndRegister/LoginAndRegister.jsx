@@ -32,9 +32,9 @@ const LoginAndRegister = ({ closeModal, login, setLogin }) => {
       </div>
       <div className='login-register-form'>
         {open.isLoginOpen && (
-          <Login closeModal={closeModal} login={login} setLogin={setLogin} />
+          <Login closeModal={closeModal} setLogin={setLogin} />
         )}
-        {open.isRegisterOpen && <Register />}
+        {open.isRegisterOpen && <Register closeModal={closeModal} />}
       </div>
     </div>
   );

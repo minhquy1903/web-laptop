@@ -36,12 +36,11 @@
 
 .item__avatar {
   /* position: relative; */
-  width: 168px;
+  width: 220px;
   height: 168px;
 }
 .item__avatar .avatar {
-  width: 168px;
-  height: 168px;
+  width: 100%;
   /* position: absolute;
     top: 0;
     left: 0;

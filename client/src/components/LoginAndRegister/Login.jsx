@@ -1,22 +1,22 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import accountApi from '../../api/accountApi';
 
-const Login = ({ closeModal, login, setLogin }) => {
+const Login = ({ closeModal, setLogin }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [statusLogin, setStatusLogin] = useState(true);
 
   const loginHandle = async () => {
     try {
-      const res = await axios.post('api/account/login', {
+      const res = await accountApi.login({
         username: username,
         password: password,
       });
-      if (res.data.result === 'NOT_FOUND') setStatusLogin(false);
-      if (res.data.result === 'SUCCESS') {
+      if (res.result === 'NOT_FOUND') setStatusLogin(false);
+      if (res.result === 'SUCCESS') {
         closeModal();
-        const infoUser = JSON.stringify(res.data.infoUser);
-        localStorage.setItem('accessToken', res.data.accessToken);
+        const infoUser = JSON.stringify(res.infoUser);
+        localStorage.setItem('accessToken', res.accessToken);
         localStorage.setItem('infoUser', infoUser);
         setLogin(true);
       }
@@ -33,6 +33,7 @@ const Login = ({ closeModal, login, setLogin }) => {
           type='text'
           placeholder='Username'
           onChange={(e) => setUsername(e.target.value)}
+          required={true}
         />
       </div>
       <div className='input-element'>
@@ -42,9 +43,10 @@ const Login = ({ closeModal, login, setLogin }) => {
           type='password'
           placeholder='Password'
           onChange={(e) => setPassword(e.target.value)}
+          required={true}
         />
         {statusLogin ? null : (
-          <div className='notice-login'>Username or password is incorrect</div>
+          <div className='error-message'>Username or password is incorrect</div>
         )}
       </div>
       <div className='remember-me'>

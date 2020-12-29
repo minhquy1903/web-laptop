@@ -16,15 +16,18 @@ export default function Account() {
   const confirmPassword = useRef(null);
   const [checkConfirmPassword, setCheckConfirmPassword] = useState(null);
   const [checkCorrectPassword, setCheckCorrectPassword] = useState(null);
-
   useEffect(() => {
+    showInfomation();
+  }, []);
+
+  const showInfomation = () => {
     const userInfomation = JSON.parse(localStorage.getItem('infoUser'));
+    if (userInfomation.name === undefined) return;
     inputName.current.value = userInfomation.name;
     inputPhone.current.value = userInfomation.phone;
     inputEmail.current.value = userInfomation.email;
     inputAddress.current.value = userInfomation.address;
-  }, []);
-
+  };
   const updateAccountInfomationHandler = async () => {
     const user = JSON.parse(localStorage.getItem('infoUser'));
 

@@ -10,15 +10,17 @@ import { CartContext } from '../Context/Context';
 import './Header.scss';
 const Header = () => {
   const [openLoginForm, setOpenLoginForm] = useState(false);
-  const [openDropdown, setOpenDropdown] = useState(false);
   const [login, setLogin] = useState(false);
-  const [cart] = useContext(CartContext);
+  const [cart, setCart] = useContext(CartContext);
 
   useEffect(() => {
     const user = localStorage.getItem('infoUser');
     if (user !== null && user !== undefined) setLogin(true);
-
-    return () => setLogin(false);
+    const _cart = JSON.parse(localStorage.getItem('cart'));
+    if (_cart !== null && _cart !== undefined) setCart(_cart);
+    return () => {
+      setLogin(false);
+    };
   }, []);
 
   return (
@@ -31,18 +33,8 @@ const Header = () => {
                 <img src='/images/logo.png' alt='logo' />
               </div>
             </Link>
+            <Dropdown />
 
-            <Dropdown
-              openDropdown={openDropdown}
-              setOpenDropdown={setOpenDropdown}>
-              <DropdownItem name={'Dell'} />
-              <DropdownItem name={'Lenovo'} />
-              <DropdownItem name={'Razer'} />
-              <DropdownItem name={'HP'} />
-              <DropdownItem name={'Macbook'} />
-              <DropdownItem name={'Asus'} />
-              <DropdownItem name={'Msi'} />
-            </Dropdown>
             <SearchBox />
           </div>
           <div className='right-header'>
@@ -107,16 +99,3 @@ const Header = () => {
 };
 
 export default Header;
-
-const DropdownItem = ({ name, setOpenLoginForm, closeDropdownAccount }) => {
-  return (
-    <div
-      className='dropdown-item'
-      onClick={() => {
-        setOpenLoginForm(true);
-        closeDropdownAccount();
-      }}>
-      {name}
-    </div>
-  );
-};

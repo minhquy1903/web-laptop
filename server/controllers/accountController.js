@@ -27,7 +27,7 @@ const updatePassword = async (req, res) => {
 
 const updateInfomation = async (req, res) => {
   await Account.updateOne(
-    { username: req.params.username },
+    { username: req.body.username },
     {
       name: req.body.name,
       address: req.body.address,
@@ -67,7 +67,7 @@ const login = async (req, res) => {
 
 const register = async (req, res) => {
   if ((await Account.findOne({ username: req.body.username })) !== null)
-    return res.status(400).json('user has taken');
+    return res.status(400).json('USERNAME_HAS_TAKEN');
   const username = req.body.username;
   const password = await hashPassword(req.body.password);
 
@@ -75,7 +75,7 @@ const register = async (req, res) => {
     username: username,
     password: password,
     info: {
-      email: req.body.info.email,
+      email: req.body.email,
     },
   });
   account

@@ -6,8 +6,6 @@ export default function SideBarInfo({
   infomation,
   history,
 }) {
-  console.log(infomation);
-
   return (
     <div className='account-infomation-left'>
       <div className='menu-wrapper'>

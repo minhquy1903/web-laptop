@@ -1,0 +1,70 @@
+{
+  "brand": [
+    {
+      "name": "Dell",
+      "subBrand": [
+        { "id": 1, "name": "Latitude" },
+        { "id": 2, "name": "XPS" },
+        { "id": 3, "name": "Precision" },
+        { "id": 4, "name": "Inspiron" },
+        { "id": 5, "name": "Gaming G Series" },
+        { "id": 6, "name": "Alienware" },
+        { "id": 104, "name": "Vostro" }
+      ]
+    },
+    {
+      "name": "HP",
+      "subBrand": [
+        { "id": 10, "name": "Elitebook" },
+        { "id": 11, "name": "ZBook" },
+        { "id": 115, "name": "Pavilion" },
+        { "id": 116, "name": "Envy" },
+        { "id": 117, "name": "Omen" }
+      ]
+    },
+    {
+      "name": "Asus",
+      "subBrand": [
+        { "id": 39, "name": "ExpertBook" },
+        { "id": 103, "name": "Vivobook" },
+        { "id": 106, "name": "Zenbook" },
+        { "id": 122, "name": "TUF/ROG Gaming" },
+        { "id": 123, "name": "ProArt Studio" }
+      ]
+    },
+    {
+      "name": "Acer",
+      "subBrand": [
+        { "id": 45, "name": "Nitro" },
+        { "id": 117, "name": "Predator" },
+        { "id": 118, "name": "Aspire" },
+        { "id": 119, "name": "Swift" }
+      ]
+    },
+    {
+      "name": "Lenovo",
+      "subBrand": [
+        { "id": 24, "name": "ThinkPad" },
+        { "id": 25, "name": "IdeaPad" },
+        { "id": 26, "name": "Legion" },
+        { "id": 27, "name": "ThinkBook" }
+      ]
+    },
+    {
+      "name": "Macbook",
+      "subBrand": [
+        { "id": 34, "name": "Macbook Pro" },
+        { "id": 35, "name": "Macbook Air" }
+      ]
+    },
+    {
+      "name": "Razer",
+      "subBrand": [
+        { "id": 17, "name": "Blade 14" },
+        { "id": 18, "name": "Blade 15" },
+        { "id": 19, "name": "Blade 17" },
+        { "id": 20, "name": "Blade Stealth" }
+      ]
+    }
+  ]
+}

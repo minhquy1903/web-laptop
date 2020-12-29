@@ -13,6 +13,7 @@ app.use(express.json());
 app.use('/api/account', accountRouter);
 app.use('/api/product', productRouter);
 app.use('/api/transaction', transactionRouter);
+
 app.listen(PORT, (err) => {
   if (err) console.log(err);
   else {

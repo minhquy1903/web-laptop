@@ -10,6 +10,8 @@ import History from './components/History/History';
 import Order from './components/Order/Order';
 import ProductDetail from './components/ProductDetail/ProductDetail';
 import { CartProvider } from './components/Context/Context';
+import ShowProduct from './components/ShowProduct/ShowProduct';
+
 import './App.css';
 
 const App = () => {
@@ -24,6 +26,7 @@ const App = () => {
             <Route path='/account' component={Account} />
             <Route path='/history' component={History} />
             <Route path='/order' component={Order} />
+            <Route path='/laptop/:brand' component={ShowProduct} exact />
             <Route path='/:productid' component={ProductDetail} />
           </Switch>
           <Footer />

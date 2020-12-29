@@ -1,22 +1,18 @@
 const productModel = require('../models/productModel');
 
 const getAllProduct = async (req, res) => {
-  console.log('zoooo');
   const products = await productModel.find({});
   res.json(products);
 };
 
 const getAllProductOfBrand = async (req, res) => {
-  console.log(req.params.brand);
-
   const products = await productModel.find({ brand: req.params.brand });
   res.json(products);
 };
 
 const getDetailProduct = async (req, res) => {
-  console.log('zooo');
   const product = await productModel.findOne({
-    productID: req.params.id,
+    _id: req.params.id,
   });
   res.json(product);
 };
@@ -24,13 +20,13 @@ const getDetailProduct = async (req, res) => {
 const getOnSaleProduct = async (req, res) => {
   const products = await productModel.find({ status: 'on_sale' });
   const onSaleProducts = [];
-  let onSaleProduct;
   for (let i = 0; i < products.length; i++) {
     onSaleProducts.push({
       name: products[i].name,
       brand: products[i].brand,
       price: products[i].price,
-      id: products[i].productID,
+      id: products[i]._id,
+      sku: products[i].sku,
       images: products[i].images,
       discount: products[i].discount,
       status: products[i].status,
@@ -47,7 +43,8 @@ const getIncomingProduct = async (req, res) => {
       name: products[i].name,
       brand: products[i].brand,
       price: products[i].price,
-      id: products[i].productID,
+      id: products[i]._id,
+      sku: products[i].sku,
       images: products[i].images,
       discount: products[i].discount,
       status: products[i].status,
@@ -59,25 +56,24 @@ const getIncomingProduct = async (req, res) => {
 const addComment = async (req, res) => {
   console.log(req.body);
   await productModel.updateOne(
-    { productID: req.body.productID },
+    { _id: req.body.productID },
     {
-      reviews: {
-        $push: {
-          comments: [
-            {
-              username: req.body.username,
-              name: req.body.name,
-              content: req.body.content,
-              createdTime: req.body.createdTime,
-              parentCommentID: req.body.parentCommentID,
-            },
-          ],
+      $push: {
+        comments: {
+          username: req.body.username,
+          name: req.body.name,
+          content: req.body.content,
+          createdTime: req.body.createdTime,
+          parentCommentID: req.body.parentComment,
         },
       },
     },
   );
-
-  res.json('success!!');
+  const listComment = await productModel.findOne({
+    _id: req.body.productID,
+  });
+  console.log(listComment);
+  res.json(listComment.comments);
 };
 
 module.exports = {

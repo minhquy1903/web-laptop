@@ -1,0 +1,10 @@
+{
+  "price": [
+    { "name": "0 - 10 triệu" },
+    { "name": "10 - 20 triệu" },
+    { "name": "20 - 30 triệu" },
+    { "name": "30 - 40 triệu" },
+    { "name": "40 - 50 triệu" },
+    { "name": "Trên 50 triệu" }
+  ]
+}

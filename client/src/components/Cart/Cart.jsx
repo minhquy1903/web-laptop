@@ -10,14 +10,16 @@ const Cart = () => {
   const [cart, setCart] = useContext(CartContext);
   const [total, setTotal] = useState(0);
 
-  const calTotal = () => {
-    let t = 0;
-    cart.forEach((product) => {
-      t += product.price;
-    });
-    setTotal(t);
-  };
+  console.log(cart);
+
   useEffect(() => {
+    const calTotal = () => {
+      let t = 0;
+      cart.forEach((product) => {
+        t += product.price;
+      });
+      setTotal(t);
+    };
     calTotal();
   }, [cart]);
 
@@ -26,6 +28,14 @@ const Cart = () => {
       cart.filter((product) => {
         return product.id !== _id;
       }),
+    );
+    localStorage.setItem(
+      'cart',
+      JSON.stringify(
+        cart.filter((product) => {
+          return product.id !== _id;
+        }),
+      ),
     );
   };
 
@@ -36,10 +46,10 @@ const Cart = () => {
         <div className='container__cart__wrap'>
           <div className='col__left'>
             <div className='cart__list'>
-              {cart.map((product) => {
+              {cart.map((product, i) => {
                 return (
                   <ProductCartItem
-                    key={product.id}
+                    key={i}
                     product={product}
                     removeItemFromCart={removeItemFromCart}
                   />

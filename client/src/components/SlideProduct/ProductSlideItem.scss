@@ -1,5 +1,4 @@
-.product-item-container {
-  width: 25%;
+.product-slide-item-container {
   height: 380px;
   border: 1px solid #e3e7ef;
   .wrap-product-item {
@@ -46,6 +45,7 @@
         color: white;
         border-radius: 20px;
         font-weight: 700;
+        margin: auto;
         margin-top: 15px;
         cursor: pointer;
       }

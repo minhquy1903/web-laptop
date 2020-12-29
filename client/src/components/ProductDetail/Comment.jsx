@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Comment = ({ content, name, createdTime }) => {
+const Comment = ({ content, name, createdTime, setShowReplyInput }) => {
   return (
     <div className='comment'>
       <div className='avatar'>
@@ -15,17 +15,12 @@ const Comment = ({ content, name, createdTime }) => {
         <div className='comment-bottom'>
           <span
             className='reply-btn'
-            // onClick={() => {
-            //   setShowReplyInput(true);
-            // }}
-          >
+            onClick={() => {
+              setShowReplyInput(true);
+            }}>
             Trả lời
           </span>
           <span className='created-time'>{createdTime}</span>
-        </div>
-        <div className='comment-textarea'>
-          <textarea placeholder='Mời bạn để lại bình luận'></textarea>
-          <button onClick={() => {}}>Gửi</button>
         </div>
       </div>
     </div>

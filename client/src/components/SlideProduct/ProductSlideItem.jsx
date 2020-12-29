@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 
 import { CartContext } from '../Context/Context';
 
-import './ProductItem.scss';
+import './ProductSlideItem.scss';
 
-export default function ProductItem({ product, loading }) {
+export default function ProductSlideItem({ product, loading }) {
   const [cart, setCart] = useContext(CartContext);
   if (loading) return <h2>Loadding ...</h2>;
   const addToCart = () => {
@@ -13,11 +13,11 @@ export default function ProductItem({ product, loading }) {
     localStorage.setItem('cart', JSON.stringify([...cart, product]));
   };
   return (
-    <div className='product-item-container'>
+    <div className='product-slide-item-container'>
       <div className='wrap-product-item'>
         <div className='top-content'>
           <div className='image-container'>
-            <Link to={`/${product.name}?option=${product._id}`}>
+            <Link to={`${product.name}?option=${product.id}`}>
               <img alt='hinh-laptop' src={product.images[0]} />
             </Link>
           </div>

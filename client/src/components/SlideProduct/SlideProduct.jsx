@@ -7,26 +7,26 @@ import './SlideProduct.scss';
 import 'swiper/swiper.scss';
 import 'swiper/components/navigation/navigation.scss';
 
-import ProductItem from '../ProductItem/ProductItem';
+import ProductSlideItem from './ProductSlideItem';
 
 SwiperCore.use([Navigation]);
 
 const SlideProduct = ({ url, titleListProduct }) => {
   const [infoProducts, setInfoProducts] = useState([]);
 
-  async function getInfoProducts() {
-    try {
-      const response = await axios.get(url);
-      setInfoProducts(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
   useEffect(() => {
+    const getInfoProducts = async () => {
+      try {
+        const response = await axios.get(url);
+        setInfoProducts(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
     getInfoProducts();
     return () => setInfoProducts();
-  }, []);
+  }, [url]);
 
   return (
     <>
@@ -38,12 +38,11 @@ const SlideProduct = ({ url, titleListProduct }) => {
           spaceBetween={0}
           slidesPerView={5}
           navigation
-          onSlideChange
           onSwiper={(swiper) => {}}>
           {infoProducts.map((product, i) => {
             return (
-              <SwiperSlide>
-                <ProductItem product={product} />
+              <SwiperSlide key={i}>
+                <ProductSlideItem key={i} product={product} />
               </SwiperSlide>
             );
           })}
