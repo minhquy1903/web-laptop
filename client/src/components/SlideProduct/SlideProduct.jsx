@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation } from 'swiper';
-import axios from 'axios';
 import './SlideProduct.scss';
 
 import 'swiper/swiper.scss';
 import 'swiper/components/navigation/navigation.scss';
 
 import ProductSlideItem from './ProductSlideItem';
+import productApi from '../../api/productApi';
 
 SwiperCore.use([Navigation]);
 
@@ -17,8 +17,13 @@ const SlideProduct = ({ url, titleListProduct }) => {
   useEffect(() => {
     const getInfoProducts = async () => {
       try {
-        const response = await axios.get(url);
-        setInfoProducts(response.data);
+        let response;
+        if (url === 'sale') {
+          response = await productApi.getOnSaleProduct();
+        } else response = await productApi.getIncomingProduct();
+
+        console.log(response);
+        setInfoProducts(response);
       } catch (error) {
         console.error(error);
       }

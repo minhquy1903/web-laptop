@@ -5,7 +5,6 @@ import MainComment from './MainComment';
 
 export default function CommentSection({ ListComment, productID }) {
   const [listComment, setListComment] = useState(ListComment);
-  console.log(listComment);
   const filterParentComment = () => {
     return listComment.filter((comment) => comment.parentCommentID === null);
   };
@@ -17,7 +16,6 @@ export default function CommentSection({ ListComment, productID }) {
   const [childrenComment, setChildrenComment] = useState(
     filterChildrenComment(),
   );
-  console.log(childrenComment);
   useEffect(() => {
     setParentComment(filterParentComment());
     setChildrenComment(filterChildrenComment());

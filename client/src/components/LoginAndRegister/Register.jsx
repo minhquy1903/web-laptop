@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import axios from 'axios';
+import accountApi from '../../api/accountApi';
 
 const usernameRegex = RegExp(
   /^(?![_ -])(?:(?![_ -]{2})[\w -]){5,16}(?<![_ -])$/,
@@ -77,7 +77,7 @@ const Register = ({ closeModal }) => {
     if (!formValid(formErrors)) return;
 
     try {
-      const response = await axios.post('api/account/register', {
+      const response = await accountApi.register({
         username: username,
         password: password,
         info: {

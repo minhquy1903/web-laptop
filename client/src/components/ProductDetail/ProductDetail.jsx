@@ -15,7 +15,7 @@ const ProductDetail = () => {
     const getDetailInfomationProduct = async (id) => {
       try {
         const res = await productApi.getDetailProduct(id);
-        console.log(res);
+        // console.log(res);
         setProductInfomation(res);
       } catch (error) {}
     };

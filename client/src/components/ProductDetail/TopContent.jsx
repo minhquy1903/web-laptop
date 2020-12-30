@@ -1,7 +1,6 @@
 import React from 'react';
 
 const TopContent = ({ productInfomation }) => {
-  console.log(productInfomation);
   return (
     <div className='product-detail'>
       <div className='left-content'>

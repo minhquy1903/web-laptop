@@ -1,10 +1,10 @@
 import React, { useRef, useEffect, useState } from 'react';
-import axios from 'axios';
 
 import Main from '../Main/Main';
 import SideBarInfo from './SideBarInfo';
 
 import './Account.scss';
+import accountApi from '../../api/accountApi';
 
 export default function Account() {
   const inputName = useRef(null);
@@ -21,7 +21,7 @@ export default function Account() {
   }, []);
 
   const showInfomation = () => {
-    const userInfomation = JSON.parse(localStorage.getItem('infoUser'));
+    const userInfomation = JSON.parse(localStorage.getItem('userInformation'));
     if (userInfomation.name === undefined) return;
     inputName.current.value = userInfomation.name;
     inputPhone.current.value = userInfomation.phone;
@@ -29,18 +29,17 @@ export default function Account() {
     inputAddress.current.value = userInfomation.address;
   };
   const updateAccountInfomationHandler = async () => {
-    const user = JSON.parse(localStorage.getItem('infoUser'));
-
-    const idUser = user.username;
+    const user = JSON.parse(localStorage.getItem('userInformation'));
 
     try {
-      const res = await axios.put(`/api/account/update/infomation/${idUser}`, {
+      const res = await accountApi.updateInfomation({
+        username: user.username,
         name: inputName.current.value,
         address: inputAddress.current.value,
         phone: inputPhone.current.value,
         email: inputEmail.current.value,
       });
-      if (res.data.result === 'SUCCESS') {
+      if (res.result === 'SUCCESS') {
         window.alert('Cập nhật thông tin thành công');
         //logoutHandler();
       }
@@ -52,21 +51,20 @@ export default function Account() {
   const updatePasswordHandler = async () => {
     if (checkConfirmPassword === false || checkConfirmPassword === null) return;
 
-    const user = JSON.parse(localStorage.getItem('infoUser'));
-
-    const idUser = user.username;
+    const user = JSON.parse(localStorage.getItem('userInformation'));
 
     try {
-      const res = await axios.put(`/api/account/update/password/${idUser}`, {
+      const res = await accountApi.updatePassword({
         currentPassword: currentPassword.current.value,
         confirmPassword: confirmPassword.current.value,
+        username: user.username,
       });
-      if (res.data.result === 'SUCCESS') {
+      if (res.result === 'SUCCESS') {
         setCheckConfirmPassword(null);
         window.alert('Đổi mật khẩu thành công!!!'); // xu li response
         setCheckCorrectPassword(null);
         //logoutHandler();
-      } else if (res.data.result === 'INCORRECT_PASSWORD') {
+      } else if (res.result === 'INCORRECT_PASSWORD') {
         setCheckCorrectPassword(false);
       }
     } catch (error) {
@@ -86,7 +84,6 @@ export default function Account() {
   };
   const logoutHandler = () => {
     localStorage.removeItem('infoUser');
-    // window.history.pushState({ urlPath: '/' }, '', '/');
     window.location.href = 'http://localhost:3000/';
   };
 

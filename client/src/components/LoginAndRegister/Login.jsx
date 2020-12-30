@@ -17,7 +17,7 @@ const Login = ({ closeModal, setLogin }) => {
         closeModal();
         const infoUser = JSON.stringify(res.infoUser);
         localStorage.setItem('accessToken', res.accessToken);
-        localStorage.setItem('infoUser', infoUser);
+        localStorage.setItem('userInformation', infoUser);
         setLogin(true);
       }
     } catch (error) {

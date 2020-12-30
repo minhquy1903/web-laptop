@@ -14,7 +14,7 @@ const Header = () => {
   const [cart, setCart] = useContext(CartContext);
 
   useEffect(() => {
-    const user = localStorage.getItem('infoUser');
+    const user = localStorage.getItem('userInformation');
     if (user !== null && user !== undefined) setLogin(true);
     const _cart = JSON.parse(localStorage.getItem('cart'));
     if (_cart !== null && _cart !== undefined) setCart(_cart);

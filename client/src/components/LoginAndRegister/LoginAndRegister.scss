@@ -48,7 +48,7 @@
           font-weight: 600;
         }
         .error {
-          border: 1px solid rgb(243, 20, 20) !important;
+          border: 1px solid#d43b2a !important;
         }
         input {
           color: #595959;
@@ -68,7 +68,7 @@
         }
         .error-message {
           font-size: 16px;
-          color: rgb(243, 20, 20);
+          color: #d43b2a;
           padding-top: 10px;
         }
       }

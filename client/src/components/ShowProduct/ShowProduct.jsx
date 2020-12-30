@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 
 import Main from '../Main/Main';
 import Filter from './Filter';
@@ -7,20 +6,24 @@ import ProductItem from '../ProductItem/ProductItem';
 import Pagination from './Pagination';
 
 import './ShowProduct.scss';
+import productApi from '../../api/productApi';
 
-const ShowProduct = () => {
+const ShowProduct = ({ match }) => {
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage] = useState(16);
   const [loading, setLoading] = useState(false);
-
+  console.log(match.params.brand);
   useEffect(() => {
     const getInfoProducts = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(`/api/product/laptop/HP`);
-
-        setProducts(response.data);
+        // if(match.params.brand !== 'allProduct')
+        const response = await productApi.getAllProductOfBrand(
+          match.params.brand,
+        );
+        console.log(response);
+        setProducts(response);
         setLoading(false);
       } catch (error) {
         console.error(error);
@@ -29,7 +32,7 @@ const ShowProduct = () => {
 
     getInfoProducts();
     return () => setProducts(null);
-  }, []);
+  }, [match.params.brand]);
 
   // Get current product page
   if (loading) return null;

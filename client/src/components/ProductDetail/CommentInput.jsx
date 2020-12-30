@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import axios from 'axios';
+import productApi from '../../api/productApi';
 
 export default function CommentInput({
   textAreaStyle,
@@ -10,9 +10,9 @@ export default function CommentInput({
   const commentText = useRef(null);
   const sendComment = async () => {
     if (commentText.current.value.trim() === '') return;
-    const user = JSON.parse(localStorage.getItem('infoUser'));
+    const user = JSON.parse(localStorage.getItem('userInformation'));
     try {
-      const res = await axios.post('api/product/comment/add', {
+      const res = await productApi.addComment({
         username: user.username,
         name: user.name,
         content: commentText.current.value,
@@ -21,7 +21,7 @@ export default function CommentInput({
         parentComment: parentComment,
       });
       commentText.current.value = '';
-      setListComment(res.data);
+      setListComment(res);
     } catch (error) {
       console.log(error);
     }

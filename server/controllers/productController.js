@@ -1,6 +1,7 @@
 const productModel = require('../models/productModel');
 
 const getAllProduct = async (req, res) => {
+  console.log('innnn');
   const products = await productModel.find({});
   res.json(products);
 };
@@ -76,6 +77,33 @@ const addComment = async (req, res) => {
   res.json(listComment.comments);
 };
 
+const addProduct = async (req, res) => {
+  const reqProduct = req.body;
+
+  const product = new productModel(reqProduct);
+  product.save().then((data) => {
+    console.log(data);
+    res.json('SUCCESS');
+  });
+};
+const editProduct = async (req, res) => {
+  await productModel.findOneAndUpdate(
+    { _id: req.params.id },
+    req.body,
+    (err, doc) => {
+      if (err) console.log(err);
+      else
+        doc.save().then((data) => {
+          console.log(data);
+          res.json(data);
+        });
+    },
+  );
+};
+const removeProduct = async (req, res) => {
+  await productModel.remove({ _id: req.params.id });
+  res.json('SUCCESS');
+};
 module.exports = {
   getDetailProduct,
   getAllProductOfBrand,
@@ -83,4 +111,7 @@ module.exports = {
   getOnSaleProduct,
   getIncomingProduct,
   addComment,
+  addProduct,
+  editProduct,
+  removeProduct,
 };

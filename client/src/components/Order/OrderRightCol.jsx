@@ -1,26 +1,25 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export default function OrderRightCol() {
+export default function OrderRightCol({ cart }) {
+  console.log(cart);
   return (
     <div className='order__col__right'>
       <div className='calculate__sidebar'>
         <div className='calculate__sidebar__row'>
           <div className>
-            <strong>Đơn hàng (1 sp)</strong>
+            <strong>Đơn hàng ({cart.length} sp)</strong>
           </div>
           <Link to='/cart'>
             Sửa
             <i className='fas fa-chevron-right' />
           </Link>
         </div>
-        <div className='calculate__sidebar__row'>
-          <div className='calculate__sidebar__name__product'>
-            <span className='color__count__amount'>1 x </span>
-            Asus ZenBook 14 Q407iq
-          </div>
-          <div className='calculate__sidebar__price'>23.490.000 ₫</div>
-        </div>
+
+        {cart.map((item, i) => {
+          return <ProductItem key={i} item={item} />;
+        })}
+
         <div className='calculate__sidebar__row__money'>
           <div className='temporary__money'>
             <div className>Tạm tính</div>
@@ -47,3 +46,15 @@ export default function OrderRightCol() {
     </div>
   );
 }
+
+const ProductItem = ({ item }) => {
+  return (
+    <div className='calculate__sidebar__row'>
+      <div className='calculate__sidebar__name__product'>
+        <span className='color__count__amount'>1 x </span>
+        {item.name}
+      </div>
+      <div className='calculate__sidebar__price'>{item.price} ₫</div>
+    </div>
+  );
+};

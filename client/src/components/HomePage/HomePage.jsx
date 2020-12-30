@@ -13,14 +13,8 @@ const HomePage = () => {
       <Main>
         <div className='home-page'>
           <Banner />
-          <SlideProduct
-            titleListProduct={'Giảm giá sốc'}
-            url={'/api/product/laptop/home/on-sale'}
-          />
-          <SlideProduct
-            titleListProduct={'Hàng mới về'}
-            url={'/api/product/laptop/home/incoming'}
-          />
+          <SlideProduct titleListProduct={'Giảm giá sốc'} url={'sale'} />
+          <SlideProduct titleListProduct={'Hàng mới về'} url={'incoming'} />
         </div>
       </Main>
     </>

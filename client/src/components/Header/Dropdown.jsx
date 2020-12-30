@@ -37,7 +37,9 @@ const DropdownItem = ({ data }) => {
   return (
     <div className='dropdown-item'>
       <h3 className='brand-name'>
-        <Link to={`/laptop/${data.name}`}>{data.name}</Link>
+        <Link to={`/laptop/${data.name}`} replace>
+          {data.name}
+        </Link>
       </h3>
       <ul>
         {data.subBrand.map((subBrand, i) => {

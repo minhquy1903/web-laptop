@@ -9,7 +9,10 @@ const Product = Schema({
   },
 
   name: String,
-  brand: String,
+  brand: {
+    name: String,
+    subBrand: String,
+  },
   detail: {
     processor: String,
     os: String,
