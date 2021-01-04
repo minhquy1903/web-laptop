@@ -7,10 +7,12 @@ router.get('/', accountController.getAccount);
 
 router.put('/update/password', accountController.updatePassword);
 
-router.put('/update/infomation', accountController.updateInfomation);
+router.put('/update/information', accountController.updateInformation);
 
 router.post('/login', accountController.login);
 
 router.post('/register', accountController.register);
+
+router.post('/remove/:id', accountController.removeAccount);
 
 module.exports = router;

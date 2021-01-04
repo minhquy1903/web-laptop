@@ -16,7 +16,7 @@ const Product = Schema({
   detail: {
     processor: String,
     os: String,
-    graphics: [String],
+    graphics: String,
     display: String,
     memory: String,
     hardDrive: String,
@@ -32,11 +32,15 @@ const Product = Schema({
   warranty: String,
 
   comments: {
-    commentID: mongoose.Types.ObjectId(),
+    id: {
+      required: true,
+      type: String,
+    },
     username: {
       required: true,
       type: String,
     },
+    avatar: String,
     name: String,
     content: String,
     createdTime: Date,

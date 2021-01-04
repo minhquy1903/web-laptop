@@ -1,13 +1,24 @@
 const productModel = require('../models/productModel');
 
 const getAllProduct = async (req, res) => {
-  console.log('innnn');
   const products = await productModel.find({});
   res.json(products);
 };
 
 const getAllProductOfBrand = async (req, res) => {
-  const products = await productModel.find({ brand: req.params.brand });
+  const brand = req.params.brand;
+  const subBrand = req.query.subBrand;
+  console.log(subBrand);
+  let products;
+  if (subBrand === undefined)
+    products = await productModel.find({
+      'brand.name': brand,
+    });
+  else
+    products = await productModel.find({
+      'brand.name': brand,
+      'brand.subBrand': subBrand,
+    });
   res.json(products);
 };
 
@@ -26,7 +37,7 @@ const getOnSaleProduct = async (req, res) => {
       name: products[i].name,
       brand: products[i].brand,
       price: products[i].price,
-      id: products[i]._id,
+      _id: products[i]._id,
       sku: products[i].sku,
       images: products[i].images,
       discount: products[i].discount,
@@ -44,7 +55,7 @@ const getIncomingProduct = async (req, res) => {
       name: products[i].name,
       brand: products[i].brand,
       price: products[i].price,
-      id: products[i]._id,
+      _id: products[i]._id,
       sku: products[i].sku,
       images: products[i].images,
       discount: products[i].discount,
@@ -55,12 +66,13 @@ const getIncomingProduct = async (req, res) => {
 };
 
 const addComment = async (req, res) => {
-  console.log(req.body);
   await productModel.updateOne(
     { _id: req.body.productID },
     {
       $push: {
         comments: {
+          id: req.body.id,
+          avatar: req.body.avatar,
           username: req.body.username,
           name: req.body.name,
           content: req.body.content,
@@ -73,7 +85,6 @@ const addComment = async (req, res) => {
   const listComment = await productModel.findOne({
     _id: req.body.productID,
   });
-  console.log(listComment);
   res.json(listComment.comments);
 };
 
@@ -83,6 +94,7 @@ const addProduct = async (req, res) => {
   const product = new productModel(reqProduct);
   product.save().then((data) => {
     console.log(data);
+
     res.json('SUCCESS');
   });
 };

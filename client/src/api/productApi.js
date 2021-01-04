@@ -1,19 +1,15 @@
 const { default: axiosClient } = require('./axiosClient');
 
 const productApi = {
-  getAllProduct: () => {
-    const url = `/product/laptop/`;
+  getAllProduct: (id) => {
+    const url = `/product/laptop/${id === 'all' ? '' : id}`;
     return axiosClient.get(url);
   },
   getDetailProduct: (id) => {
     const url = `/product/laptop/detail/${id}`;
     return axiosClient.get(url);
   },
-  getAllProductOfBrand: (id) => {
-    const url = `/product/laptop/${id}`;
-    console.log(url);
-    return axiosClient.get(url);
-  },
+
   getOnSaleProduct: () => {
     const url = `/product/laptop/home/on-sale`;
     return axiosClient.get(url);

@@ -1,13 +1,10 @@
 import React from 'react';
 
-const Comment = ({ content, name, createdTime, setShowReplyInput }) => {
+const Comment = ({ content, name, createdTime, setShowReplyInput, avatar }) => {
   return (
     <div className='comment'>
       <div className='avatar'>
-        <img
-          src='https://soicauvn.com/wp-content/uploads/2020/04/20-hinh-anh-gai-xinh-mac-bikini-mau-hong-nhay-sexy-nong-bong-15.jpg'
-          alt='avatar'
-        />
+        <img src={avatar} alt='avatar' />
       </div>
       <div className='comment-content'>
         <span className='name'>{name}</span>

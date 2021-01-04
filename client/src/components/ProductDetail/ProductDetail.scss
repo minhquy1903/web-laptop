@@ -44,6 +44,36 @@
         }
       }
     }
+    .price-wrapper {
+      display: flex;
+      margin-left: 16px;
+      margin-top: 46px;
+
+      .price {
+        line-height: 28px;
+        font-weight: 600;
+        color: #d53b2a;
+        font-size: 34px;
+      }
+      .btn-add-cart {
+        cursor: pointer;
+        min-width: 100px;
+        display: block;
+        padding: 8px 32px;
+        border: none;
+        outline: none;
+        background-color: #06c1d4;
+        color: white;
+        font-size: 18px;
+        border-radius: 24px;
+        margin-left: 125px;
+        &:hover {
+          filter: brightness(1.1);
+          font-weight: 700;
+        }
+      }
+    }
+
     .all-detail {
       display: flex;
       justify-content: space-between;

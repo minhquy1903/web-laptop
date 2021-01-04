@@ -9,33 +9,33 @@ import productApi from '../../api/productApi';
 import './ProductDetail.scss';
 
 const ProductDetail = () => {
-  const [productInfomation, setProductInfomation] = useState(null);
+  const [productInformation, setProductInformation] = useState(null);
 
   useEffect(() => {
-    const getDetailInfomationProduct = async (id) => {
+    const getDetailInformationProduct = async (id) => {
       try {
         const res = await productApi.getDetailProduct(id);
         // console.log(res);
-        setProductInfomation(res);
+        setProductInformation(res);
       } catch (error) {}
     };
     const id = queryString.parse(window.location.search);
-    getDetailInfomationProduct(id.option);
+    getDetailInformationProduct(id.option);
   }, []);
 
   return (
     <Main>
       <div className='container-product-detail'>
-        {productInfomation === null ? null : (
-          <TopContent productInfomation={productInfomation} />
+        {productInformation === null ? null : (
+          <TopContent productInformation={productInformation} />
         )}
         {/* top content */}
         <div className='middle-content'>
           <Evaluation />
-          {productInfomation === null ? null : (
+          {productInformation === null ? null : (
             <CommentSection
-              ListComment={productInfomation.comments}
-              productID={productInfomation._id}
+              ListComment={productInformation.comments}
+              productID={productInformation._id}
             />
           )}
         </div>

@@ -1,8 +1,8 @@
 import axiosClient from './axiosClient';
 
 const accountApi = {
-  updateInfomation: (body) => {
-    const url = `/account/update/infomation`;
+  updateInformation: (body) => {
+    const url = `/account/update/information`;
     return axiosClient.put(url, body);
   },
   updatePassword: (body) => {

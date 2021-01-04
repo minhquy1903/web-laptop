@@ -1,18 +1,39 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
-const TopContent = ({ productInfomation }) => {
+import { formatMoney } from '../../service/service';
+import { CartContext } from '../Context/Context';
+
+const TopContent = ({ productInformation }) => {
+  const [cart, setCart] = useContext(CartContext);
+
+  const addToCart = () => {
+    let product = {
+      name: productInformation.name,
+      brand: productInformation.brand,
+      price: productInformation.price,
+      _id: productInformation._id,
+      sku: productInformation.sku,
+      images: productInformation.images,
+      discount: productInformation.discount,
+      status: productInformation.status,
+    };
+
+    setCart([...cart, product]);
+    localStorage.setItem('cart', JSON.stringify([...cart, product]));
+  };
+
   return (
     <div className='product-detail'>
       <div className='left-content'>
         <div className='container-image'>
-          <img src={productInfomation.images} alt='hinh-laptop' />
+          <img src={productInformation.images} alt='hinh-laptop' />
         </div>
       </div>
       <div className='right-content'>
         <div className='title-product'>
-          <h1 className='product-name pd-15'>{productInfomation.name}</h1>
+          <h1 className='product-name pd-15'>{productInformation.name}</h1>
           <div className='code pd-15'>
-            <span>SKU: {productInfomation.sku}</span>
+            <span>SKU: {productInformation.sku}</span>
           </div>
           <div className='vote'>
             <ul>
@@ -33,7 +54,7 @@ const TopContent = ({ productInfomation }) => {
               </li>
             </ul>
             <p>Đánh giá</p>
-            <p>Bình luận</p>
+            <p>{productInformation.comments.length} Bình luận</p>
           </div>
         </div>
         <div className='all-detail'>
@@ -42,55 +63,65 @@ const TopContent = ({ productInfomation }) => {
             <ul>
               <li>
                 <strong>Vi xử lý: </strong>
-                {productInfomation.detail.processor}
+                {productInformation.detail.processor}
               </li>
               <li>
                 <strong>Màn hình: </strong>
-                {productInfomation.detail.display}
+                {productInformation.detail.display}
               </li>
               <li>
                 <strong>RAM: </strong>
-                {productInfomation.detail.memory}
+                {productInformation.detail.memory}
               </li>
               <li>
-                <strong>Card đồ họa:</strong>
-                {productInfomation.detail.graphics}
+                <strong>Card đồ họa: </strong>
+                {productInformation.detail.graphics}
               </li>
               <li>
                 <strong>Lưu trữ: </strong>
-                {productInfomation.detail.hardDrive}
+                {productInformation.detail.hardDrive}
               </li>
               <li>
                 <strong>Pin: </strong>
-                {productInfomation.detail.battery}
+                {productInformation.detail.battery}
               </li>
               <li>
                 <strong>Kết nối chính: </strong>
-                {productInfomation.detail.ports}
+                {productInformation.detail.ports}
               </li>
               <li>
                 <strong>Cân nặng: </strong>
-                {productInfomation.detail.weight}
+                {productInformation.detail.weight}
               </li>
               <li>
                 <strong>Hệ điều hành: </strong>
-                {productInfomation.detail.os}
+                {productInformation.detail.os}
               </li>
             </ul>
             <div className='color'>
               <span>
                 <strong>Màu sắc: </strong>
-                {productInfomation.detail.color}
+                {productInformation.detail.color}
               </span>
-              <img src={productInfomation.images} alt='hinh-laptop' />
+              <img src={productInformation.images} alt='hinh-laptop' />
             </div>
           </div>
           <div className='warranty'>
             <h3>Bảo hành</h3>
             <ul>
-              <li>{productInfomation.warranty}</li>
+              <li>{productInformation.warranty}</li>
             </ul>
           </div>
+        </div>
+        <div className='price-wrapper'>
+          <div className='price'>
+            {' '}
+            {formatMoney(productInformation.price)} đ
+          </div>
+
+          <button className='btn-add-cart' onClick={() => addToCart()}>
+            Thêm vào giỏ hàng
+          </button>
         </div>
       </div>
     </div>

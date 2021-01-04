@@ -3,22 +3,22 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const Transactions = Schema({
-  transactionID: {
-    type: String,
-    required: true,
-  },
   customer: {
-    username: String,
-    address: String,
+    id: String,
     phone: String,
     name: String,
+    address: String,
   },
-  products: [],
+  products: {
+    id: String,
+    name: String,
+    sku: String,
+    discount: Number,
+    price: Number,
+    type: Array,
+  },
   total: Number,
-  date: {
-    orderDay: Date,
-    deliveryDay: Date,
-  },
+  date: Date,
   status: Boolean,
 });
 

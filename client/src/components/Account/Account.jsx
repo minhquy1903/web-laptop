@@ -1,12 +1,12 @@
 import React, { useRef, useEffect, useState } from 'react';
-
+// import { useHistory } from 'react-router-dom';
 import Main from '../Main/Main';
 import SideBarInfo from './SideBarInfo';
 
 import './Account.scss';
 import accountApi from '../../api/accountApi';
 
-export default function Account() {
+export default function Account({ history }) {
   const inputName = useRef(null);
   const inputPhone = useRef(null);
   const inputAddress = useRef(null);
@@ -14,26 +14,30 @@ export default function Account() {
   const currentPassword = useRef(null);
   const newPassword = useRef(null);
   const confirmPassword = useRef(null);
+  const avatar = useRef(null);
+  const [avatarSrc, setAvatarSrc] = useState('');
   const [checkConfirmPassword, setCheckConfirmPassword] = useState(null);
   const [checkCorrectPassword, setCheckCorrectPassword] = useState(null);
   useEffect(() => {
-    showInfomation();
+    fillInformation();
   }, []);
 
-  const showInfomation = () => {
-    const userInfomation = JSON.parse(localStorage.getItem('userInformation'));
-    if (userInfomation.name === undefined) return;
-    inputName.current.value = userInfomation.name;
-    inputPhone.current.value = userInfomation.phone;
-    inputEmail.current.value = userInfomation.email;
-    inputAddress.current.value = userInfomation.address;
+  const fillInformation = () => {
+    const userInformation = JSON.parse(localStorage.getItem('userInformation'));
+    if (userInformation.name === undefined) return;
+    avatar.current.src = userInformation.avatar;
+    inputName.current.value = userInformation.name;
+    inputPhone.current.value = userInformation.phone;
+    inputEmail.current.value = userInformation.email;
+    inputAddress.current.value = userInformation.address;
   };
-  const updateAccountInfomationHandler = async () => {
+  const updateAccountInformationHandler = async () => {
     const user = JSON.parse(localStorage.getItem('userInformation'));
 
     try {
-      const res = await accountApi.updateInfomation({
+      const res = await accountApi.updateInformation({
         username: user.username,
+        avatar: avatarSrc,
         name: inputName.current.value,
         address: inputAddress.current.value,
         phone: inputPhone.current.value,
@@ -83,23 +87,61 @@ export default function Account() {
     else setCheckConfirmPassword(true);
   };
   const logoutHandler = () => {
-    localStorage.removeItem('infoUser');
+    localStorage.removeItem('userInformation');
+    // history.push('/');
     window.location.href = 'http://localhost:3000/';
   };
 
+  function formHandle(e) {
+    const form = new FormData();
+    form.append('image', e.target.files[0]);
+
+    const key = '7ad27d66522c6417d399ea2481da9dee';
+    const url = `https://api.imgbb.com/1/upload?key=${key}`;
+    fetch(url, {
+      method: 'POST',
+      body: form,
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then((data) => setAvatarSrc(data.data.url))
+      .catch(function (error) {
+        alert('error', error);
+      });
+  }
   return (
     <Main>
-      <div className='account-infomation-container'>
+      <div className='account-information-container'>
         <SideBarInfo
           logoutHandler={logoutHandler}
           hasLogout={true}
-          infomation={true}
+          information={true}
         />
-        <div className='account-infomation-right'>
-          <div className='container-infomation'>
+        <div className='account-information-right'>
+          <div className='container-information'>
             <h2 className='title'>Thông tin tài khoản</h2>
             <div className='wrap-content'>
               <div className='form-update'>
+                <div className='input-item w100'>
+                  <div className='choose-avatar'>
+                    <div className='avatar'>
+                      <img
+                        src='https://i.ibb.co/T06rD5X/avatar-default.jpg'
+                        alt='avatar'
+                        ref={avatar}
+                      />
+                    </div>
+
+                    <label>
+                      <input type='file' id='inpFile' onChange={formHandle} />
+                      <span>Thay ảnh đại diện</span>
+                    </label>
+                  </div>
+                </div>
                 <div className='input-item'>
                   <label htmlFor='name'>Họ và tên</label>
                   <input type='text' className='input-text' ref={inputName} />
@@ -123,13 +165,13 @@ export default function Account() {
               </div>
               <button
                 className='update-btn'
-                onClick={() => updateAccountInfomationHandler()}>
+                onClick={() => updateAccountInformationHandler()}>
                 Cập nhật
               </button>
             </div>
           </div>
 
-          <div className='container-infomation'>
+          <div className='container-information'>
             <h2 className='title'>Thay đổi mật khẩu</h2>
             <div className='wrap-content'>
               <div className='form-update form-update-password'>

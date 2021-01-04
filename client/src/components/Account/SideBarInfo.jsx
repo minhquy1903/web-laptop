@@ -3,14 +3,14 @@ import { Link } from 'react-router-dom';
 export default function SideBarInfo({
   logoutHandler,
   hasLogout,
-  infomation,
+  information,
   history,
 }) {
   return (
-    <div className='account-infomation-left'>
+    <div className='account-information-left'>
       <div className='menu-wrapper'>
         <ul className='menu-option'>
-          <li className={`item-option ${infomation && 'active'}`}>
+          <li className={`item-option ${information && 'active'}`}>
             <Link to='/account' className=''>
               <i className='far fa-user-circle'></i>
               <span>Tài khoản</span>

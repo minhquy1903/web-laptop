@@ -22,7 +22,6 @@ const SlideProduct = ({ url, titleListProduct }) => {
           response = await productApi.getOnSaleProduct();
         } else response = await productApi.getIncomingProduct();
 
-        console.log(response);
         setInfoProducts(response);
       } catch (error) {
         console.error(error);

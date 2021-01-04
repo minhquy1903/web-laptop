@@ -7,7 +7,7 @@ import './History.scss';
 export default function History() {
   return (
     <Main>
-      <div className='account-infomation-container height'>
+      <div className='account-information-container height'>
         <SideBarInfo hasLogout={false} history={true} />
         <div className='right-content'>
           <div className='table-container'>

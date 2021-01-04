@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 
 import Main from '../Main/Main';
 import Filter from './Filter';
@@ -8,21 +8,33 @@ import Pagination from './Pagination';
 import './ShowProduct.scss';
 import productApi from '../../api/productApi';
 
-const ShowProduct = ({ match }) => {
+const ShowProduct = ({ match, location }) => {
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage] = useState(16);
   const [loading, setLoading] = useState(false);
-  console.log(match.params.brand);
+  const [subBrand, setSubBrand] = useState([]);
+
   useEffect(() => {
+    // console.log(match);
+    // console.log(location);
     const getInfoProducts = async () => {
       try {
         setLoading(true);
-        // if(match.params.brand !== 'allProduct')
-        const response = await productApi.getAllProductOfBrand(
-          match.params.brand,
-        );
-        console.log(response);
+        let query;
+        if (location.search !== undefined) query = location.search;
+
+        if (subBrand.length !== 0) {
+          for (let i = 0; i < subBrand.length; i++) {
+            location.search += `&subBrand=${subBrand[i]}`;
+          }
+          query = location.search;
+        }
+
+        console.log(query);
+        const url = match.params.brand + query;
+
+        const response = await productApi.getAllProduct(url);
         setProducts(response);
         setLoading(false);
       } catch (error) {
@@ -32,10 +44,13 @@ const ShowProduct = ({ match }) => {
 
     getInfoProducts();
     return () => setProducts(null);
-  }, [match.params.brand]);
-
+  }, [match, location, subBrand]);
+  // console.log(subBrand);
+  // console.log(location);
   // Get current product page
-  if (loading) return null;
+  const brand = useMemo(() => match.params.brand, []);
+
+  if (loading) return <div>loading ...</div>;
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProuct = indexOfLastProduct - productsPerPage;
   const currentProducts = products.slice(
@@ -48,7 +63,7 @@ const ShowProduct = ({ match }) => {
     <Main>
       <div className='show-product'>
         <div className='col-left'>
-          <Filter />
+          <Filter brand={brand} subBrand={subBrand} setSubBrand={setSubBrand} />
         </div>
         <div className='col-right'>
           <div className='list-product'>

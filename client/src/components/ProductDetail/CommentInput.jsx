@@ -1,5 +1,10 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
+
 import productApi from '../../api/productApi';
+import Modal from '../Modal/Modal';
+import Notification from '../Notification/Notification';
+
+import { v1 as uuid } from 'uuid';
 
 export default function CommentInput({
   textAreaStyle,
@@ -7,14 +12,32 @@ export default function CommentInput({
   productID,
   setListComment,
 }) {
+  const [open, setOpen] = useState(false);
   const commentText = useRef(null);
+
+  const closeModal = () => {
+    setOpen(false);
+  };
+
   const sendComment = async () => {
+    const userLocal = localStorage.getItem('userInformation');
+    if (userLocal === null) {
+      setOpen(true);
+      commentText.current.value = '';
+
+      return;
+    }
+
     if (commentText.current.value.trim() === '') return;
     const user = JSON.parse(localStorage.getItem('userInformation'));
+    const id = uuid();
+    console.log(id);
     try {
       const res = await productApi.addComment({
+        id: id,
         username: user.username,
         name: user.name,
+        avatar: user.avatar,
         content: commentText.current.value,
         createdTime: new Date(),
         productID: productID,
@@ -40,6 +63,7 @@ export default function CommentInput({
           <textarea
             autoFocus={true}
             ref={commentText}
+            rows={1}
             style={textAreaStyle}
             placeholder='Mời bạn để lại bình luận'
             onKeyPress={(e) => (e.key === 'Enter' ? sendComment() : null)}
@@ -48,6 +72,13 @@ export default function CommentInput({
 
         <button onClick={() => sendComment()}>Gửi</button>
       </div>
+      <Modal openModal={open} closeModal={closeModal}>
+        <Notification
+          type='OK'
+          content={'Bạn cần đăng nhập để có thể bình luận'}
+          closeModal={closeModal}
+        />
+      </Modal>
     </>
   );
 }

@@ -2,7 +2,8 @@
   width: 100%;
   position: fixed;
   top: 0;
-  border-bottom: 1px solid #c7c7c7;
+  // border-bottom: 1px solid #e3e7ef;
+  box-shadow: 0 1px 8px #e3e7ef;
   background-color: white;
   z-index: 5;
 }
@@ -115,7 +116,7 @@
       }
       &:hover {
         border-radius: 30px;
-        background-color: #f3f3f3;
+        background-color: #f3f5f8;
       }
     }
   }
@@ -178,9 +179,8 @@
           padding: 8px 0;
           &:hover {
             cursor: pointer;
-            a {
-              color: #06c1d4;
-            }
+
+            color: #06c1d4;
           }
         }
       }

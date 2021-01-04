@@ -4,7 +4,9 @@ import { Link } from 'react-router-dom';
 const Dropdown = () => {
   return (
     <div className='menu-item'>
-      <h2 className='title-dropdown-menu'>Laptop</h2>
+      <Link to={'/laptop/all'}>
+        <h2 className='title-dropdown-menu'>Laptop</h2>
+      </Link>
       <DropDownMenu />
     </div>
   );
@@ -36,19 +38,17 @@ const DropDownMenu = () => {
 const DropdownItem = ({ data }) => {
   return (
     <div className='dropdown-item'>
-      <h3 className='brand-name'>
-        <Link to={`/laptop/${data.name}`} replace>
-          {data.name}
-        </Link>
-      </h3>
+      <Link to={`/laptop/${data.name}`} replace>
+        <h3 className='brand-name'>{data.name}</h3>
+      </Link>
       <ul>
         {data.subBrand.map((subBrand, i) => {
           return (
-            <li key={i} className='sub-brand'>
-              <Link to={`/laptop/${data.name}?subBrand=${subBrand.name}`}>
+            <Link key={i} to={`/laptop/${data.name}?subBrand=${subBrand.name}`}>
+              <li key={i} className='sub-brand'>
                 {subBrand.name}
-              </Link>
-            </li>
+              </li>
+            </Link>
           );
         })}
       </ul>

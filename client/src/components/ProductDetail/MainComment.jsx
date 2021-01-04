@@ -16,7 +16,7 @@ const MainComment = ({
   const [showReplyInput, setShowReplyInput] = useState(false);
   const filterReplyComment = () => {
     return childrenComment.filter(
-      (element) => element.parentCommentID === comment.username,
+      (element) => element.parentCommentID === comment.id,
     );
   };
   const [replyComment, setReplyComment] = useState(filterReplyComment());
@@ -27,6 +27,7 @@ const MainComment = ({
     <div className='comment-container'>
       <Comment
         content={comment.content}
+        avatar={comment.avatar}
         name={comment.name}
         createdTime={comment.createdTime}
         setShowReplyInput={setShowReplyInput}
@@ -39,6 +40,7 @@ const MainComment = ({
               key={i}
               content={comment.content}
               name={comment.name}
+              avatar={comment.avatar}
               createdTime={comment.createdTime}
             />
           );
@@ -46,7 +48,7 @@ const MainComment = ({
         {showReplyInput && (
           <CommentInput
             textAreaStyle={textAreaStyle}
-            parentComment={comment.username}
+            parentComment={comment.id}
             productID={productID}
             setListComment={setListComment}
           />

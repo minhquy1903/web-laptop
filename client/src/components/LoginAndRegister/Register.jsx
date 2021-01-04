@@ -75,14 +75,13 @@ const Register = ({ closeModal }) => {
   const register = async (e) => {
     e.preventDefault();
     if (!formValid(formErrors)) return;
-
+    const defaultAvatar = 'https://i.ibb.co/T06rD5X/avatar-default.jpg';
     try {
       const response = await accountApi.register({
         username: username,
         password: password,
-        info: {
-          email: email,
-        },
+        avatar: defaultAvatar,
+        email: email,
       });
       console.log(response);
       closeModal();

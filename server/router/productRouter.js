@@ -9,7 +9,7 @@ router.get('/laptop/home/on-sale', productController.getOnSaleProduct);
 router.get('/laptop/home/incoming', productController.getIncomingProduct);
 router.post('/comment/add', productController.addComment);
 router.post('/laptop/add', productController.addProduct);
-router.put('/laptop/edit', productController.editProduct);
-router.delete('/laptop/remove', productController.removeProduct);
+router.put('/laptop/edit/:id', productController.editProduct);
+router.delete('/laptop/remove/:id', productController.removeProduct);
 
 module.exports = router;

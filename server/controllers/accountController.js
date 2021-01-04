@@ -25,10 +25,14 @@ const updatePassword = async (req, res) => {
   return res.status(200).json({ result: 'SUCCESS' });
 };
 
-const updateInfomation = async (req, res) => {
+const updateInformation = async (req, res) => {
+  const defaultAvatar = 'https://i.ibb.co/T06rD5X/avatar-default.jpg';
+  const avatar = req.body.avatar;
+  if (req.body.avatar === '') avatar = defaultAvatar;
   await Account.updateOne(
     { username: req.body.username },
     {
+      avatar: avatar,
       name: req.body.name,
       address: req.body.address,
       phone: req.body.phone,
@@ -46,7 +50,9 @@ const login = async (req, res) => {
   if (user === null) return res.json({ result: 'NOT_FOUND' });
   if ((await bcrypt.compare(password, user.password)) === true) {
     const infoUser = {
+      id: user._id,
       username: user.username,
+      avatar: user.avatar,
       name: user.name,
       address: user.address,
       phone: user.phone,
@@ -74,9 +80,9 @@ const register = async (req, res) => {
   const account = new Account({
     username: username,
     password: password,
-    info: {
-      email: req.body.email,
-    },
+    avatar: req.body.avatar,
+    email: req.body.email,
+    type: req.body.type,
   });
   account
     .save()
@@ -90,15 +96,21 @@ const register = async (req, res) => {
     });
 };
 
+const removeAccount = async (req, res) => {
+  await Account.remove({ _id: req.params.id });
+  res.json('SUCCESS');
+};
+
 const getAccount = async (req, res) => {
-  const accounts = await Account.find({});
+  const accounts = await Account.find({ type: 1 });
   res.json(accounts);
 };
 
 module.exports = {
   updatePassword,
-  updateInfomation,
+  updateInformation,
   login,
   register,
   getAccount,
+  removeAccount,
 };

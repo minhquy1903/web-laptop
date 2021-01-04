@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import Main from '../Main/Main';
 import { CartContext } from '../Context/Context';
+import { formatMoney } from '../../service/service';
 
 import './Cart.css';
 
@@ -10,13 +11,11 @@ const Cart = () => {
   const [cart, setCart] = useContext(CartContext);
   const [total, setTotal] = useState(0);
 
-  console.log(cart);
-
   useEffect(() => {
     const calTotal = () => {
       let t = 0;
       cart.forEach((product) => {
-        t += product.price;
+        t += product.price - product.discount;
       });
       setTotal(t);
     };
@@ -24,16 +23,17 @@ const Cart = () => {
   }, [cart]);
 
   const removeItemFromCart = (_id) => {
+    console.log(_id);
     setCart(
       cart.filter((product) => {
-        return product.id !== _id;
+        return product._id !== _id;
       }),
     );
     localStorage.setItem(
       'cart',
       JSON.stringify(
         cart.filter((product) => {
-          return product.id !== _id;
+          return product._id !== _id;
         }),
       ),
     );
@@ -74,14 +74,14 @@ const CheckouSideBar = ({ total }) => {
           <div>
             <strong>Tạm tính</strong>
           </div>
-          <div>{total} ₫</div>
+          <div>{formatMoney(total)} ₫</div>
         </div>
         <ul className='price__total__container'>
           <li className='price__total'>
             <div className>
               <strong>Thành tiền</strong>
             </div>
-            <div className='total'>{total} ₫</div>
+            <div className='total'>{formatMoney(total)} ₫</div>
           </li>
           <li className='btn_container'>
             <Link to='/order' className='btn__calculation'>
@@ -103,11 +103,11 @@ const ProductCartItem = ({ product, removeItemFromCart }) => {
       {/* item__avatar */}
       <div className='item__content'>
         <h3 className='content'>{product.name}</h3>
-        <p>SKU: {product.id}</p>
+        <p>SKU: {product.sku}</p>
         <div className='btn__xoa'>
           <button
             className='delete-btn'
-            onClick={() => removeItemFromCart(product.id)}>
+            onClick={() => removeItemFromCart(product._id)}>
             Xóa
           </button>
         </div>
@@ -115,8 +115,13 @@ const ProductCartItem = ({ product, removeItemFromCart }) => {
       {/* item__content */}
       <div className='item__price'>
         <div className='price'>
-          <strong> {product.price} ₫</strong>
+          <strong> {formatMoney(product.price - product.discount)} ₫</strong>
         </div>
+        {product.discount !== 0 ? (
+          <div className='price'>
+            <strike>{formatMoney(product.price)} ₫</strike>
+          </div>
+        ) : null}
       </div>
       {/* item__price */}
     </li>

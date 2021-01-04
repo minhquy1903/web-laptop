@@ -1,14 +1,29 @@
 import React, { useState, useEffect } from 'react';
 
-export default function Filter() {
+export default function Filter({ brand, subBrand, setSubBrand }) {
   const [category, setCategory] = useState([]);
   const [filterPrice, setFilterPrice] = useState([]);
+  const handleFilter = (e) => {
+    if (e.target.checked === true) {
+      setSubBrand([...subBrand, e.target.name]);
+    } else {
+      setSubBrand(subBrand.filter((element) => element !== e.target.name));
+    }
+  };
+
   useEffect(() => {
     const getCategory = () => {
       fetch('/category.json')
         .then((response) => response.json())
         .then((data) => {
-          setCategory(data.brand);
+          if (brand === 'all') setCategory(data.brand);
+          else {
+            const brandArr = data.brand;
+            const { subBrand } = brandArr.find(
+              (element) => element.name === brand,
+            );
+            setCategory(subBrand);
+          }
         });
     };
 
@@ -21,16 +36,20 @@ export default function Filter() {
     };
     getCategory();
     getFiterPrice();
-  }, []);
+  }, [brand]);
   return (
     <div className='catalogue-wrap'>
-      <CatalogueList title={'Thương hiệu'} data={category} />
+      <CatalogueList
+        title={'Thương hiệu'}
+        data={category}
+        handleFilter={handleFilter}
+      />
       <CatalogueList title={'Khoảng giá'} data={filterPrice} />
     </div>
   );
 }
 
-const CatalogueList = ({ data, title }) => {
+const CatalogueList = ({ data, title, handleFilter }) => {
   const [show, setShow] = useState(false);
 
   return (
@@ -49,17 +68,21 @@ const CatalogueList = ({ data, title }) => {
       </h3>
       <div className={show ? 'catalogue__list show' : 'catalogue__list'}>
         {data.map((item, i) => (
-          <CatalogueListItem key={i} item={item} />
+          <CatalogueListItem key={i} item={item} handleFilter={handleFilter} />
         ))}
       </div>
     </div>
   );
 };
 
-const CatalogueListItem = ({ item }) => {
+const CatalogueListItem = ({ item, handleFilter }) => {
   return (
     <div className='catalogue__list-item'>
-      <input type='checkbox' />
+      <input
+        type='checkbox'
+        name={item.name}
+        onChange={(e) => handleFilter(e)}
+      />
       <span>{item.name}</span>
     </div>
   );

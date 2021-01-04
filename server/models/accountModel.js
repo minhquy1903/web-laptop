@@ -12,6 +12,7 @@ const Account = new Schema({
     type: String,
     required: true,
   },
+  avatar: String,
   name: String,
   address: String,
   phone: String,

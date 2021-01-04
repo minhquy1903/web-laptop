@@ -1,8 +1,27 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { formatMoney } from '../../service/service';
 
-export default function OrderRightCol({ cart }) {
-  console.log(cart);
+export default function OrderRightCol({ cart, setTotal }) {
+  useEffect(() => {
+    setTotal(calTotal() - discountMoney());
+  }, []);
+
+  const calTotal = () => {
+    let total = 0;
+    cart.forEach((product) => {
+      total += product.price;
+    });
+    return total;
+  };
+  const discountMoney = () => {
+    let discountMoney = 0;
+    cart.forEach((product) => {
+      discountMoney += product.discount;
+    });
+    return discountMoney;
+  };
+
   return (
     <div className='order__col__right'>
       <div className='calculate__sidebar'>
@@ -24,13 +43,13 @@ export default function OrderRightCol({ cart }) {
           <div className='temporary__money'>
             <div className>Tạm tính</div>
             <div className>
-              <strong>134.460.000 ₫</strong>
+              <strong>{formatMoney(calTotal())} ₫</strong>
             </div>
           </div>
           <div className='discount__money'>
             <div className>Giảm giá</div>
             <div className='color__count__amount'>
-              <strong>-5.500.000 ₫</strong>
+              <strong>-{formatMoney(discountMoney())} ₫</strong>
             </div>
           </div>
         </div>
@@ -39,7 +58,7 @@ export default function OrderRightCol({ cart }) {
             Thành tiền
           </div>
           <div className='calculate__sidebar__total__money'>
-            <strong>128.960.000 ₫</strong>
+            <strong>{formatMoney(calTotal() - discountMoney())} ₫</strong>
           </div>
         </div>
       </div>
@@ -54,7 +73,9 @@ const ProductItem = ({ item }) => {
         <span className='color__count__amount'>1 x </span>
         {item.name}
       </div>
-      <div className='calculate__sidebar__price'>{item.price} ₫</div>
+      <div className='calculate__sidebar__price'>
+        {formatMoney(item.price)} ₫
+      </div>
     </div>
   );
 };

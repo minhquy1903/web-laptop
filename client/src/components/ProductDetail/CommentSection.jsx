@@ -4,6 +4,7 @@ import CommentInput from './CommentInput';
 import MainComment from './MainComment';
 
 export default function CommentSection({ ListComment, productID }) {
+  console.log(ListComment);
   const [listComment, setListComment] = useState(ListComment);
   const filterParentComment = () => {
     return listComment.filter((comment) => comment.parentCommentID === null);

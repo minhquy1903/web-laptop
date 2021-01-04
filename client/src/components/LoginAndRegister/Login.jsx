@@ -8,6 +8,7 @@ const Login = ({ closeModal, setLogin }) => {
 
   const loginHandle = async () => {
     try {
+      console.log('hahaha');
       const res = await accountApi.login({
         username: username,
         password: password,
@@ -44,6 +45,7 @@ const Login = ({ closeModal, setLogin }) => {
           placeholder='Password'
           onChange={(e) => setPassword(e.target.value)}
           required={true}
+          onKeyPress={(e) => (e.key === 'Enter' ? loginHandle() : null)}
         />
         {statusLogin ? null : (
           <div className='error-message'>Username or password is incorrect</div>
