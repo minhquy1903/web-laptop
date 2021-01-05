@@ -9,7 +9,7 @@ import OrderResult from './OrderResult';
 import orderApi from '../../api/orderApi';
 
 export default function ContainerOrder() {
-  const [cart] = useContext(CartContext);
+  const [cart, setCart] = useContext(CartContext);
   const [openModal, setOpenModal] = useState(false);
   const [openResultModal, setOpenResultModal] = useState(false);
   const [result, setResult] = useState(false);
@@ -26,29 +26,35 @@ export default function ContainerOrder() {
   useEffect(() => {
     if (result === false) return;
     let products = [];
-    let date = new Date();
+    let _date = new Date();
+    let date = `${_date.getDate()}/${
+      _date.getMonth() + 1
+    }/${_date.getFullYear()}`;
     cart.forEach((element) => {
       products.push({
         productid: element.id,
         productName: element.name,
         sku: element.sku,
         discount: element.discount,
-        total: total,
-        date: date,
+        image: element.images[0],
+        price: element.price,
       });
     });
+    console.log(cart);
     const body = {
       customerid: userInformation.id,
       phone: userInformation.phone,
       name: userInformation.name,
       address: userInformation.address,
+      date: date,
       products: products,
       total: total,
     };
     const response = orderApi.order(body);
-    console.log(response);
     setOpenResultModal(true);
-  }, [result]);
+    setCart([]);
+    localStorage.removeItem('cart');
+  }, [result, cart, total]);
 
   return (
     <div className='container__order__wrap'>

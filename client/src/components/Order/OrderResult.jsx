@@ -1,4 +1,5 @@
 import React from 'react';
+import { formatMoney } from '../../service/service';
 
 import './OrderResult.scss';
 
@@ -35,7 +36,7 @@ export default function OrderResult({
 
           <div className='info'>
             <span>
-              Tổng tiền thanh toán: <strong>{total}</strong>
+              Tổng tiền thanh toán: <strong>{formatMoney(total)} ₫</strong>
             </span>
           </div>
         </div>

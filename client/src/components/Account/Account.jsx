@@ -26,6 +26,7 @@ export default function Account({ history }) {
     const userInformation = JSON.parse(localStorage.getItem('userInformation'));
     if (userInformation.name === undefined) return;
     avatar.current.src = userInformation.avatar;
+    console.log(userInformation.avatar);
     inputName.current.value = userInformation.name;
     inputPhone.current.value = userInformation.phone;
     inputEmail.current.value = userInformation.email;
@@ -33,19 +34,22 @@ export default function Account({ history }) {
   };
   const updateAccountInformationHandler = async () => {
     const user = JSON.parse(localStorage.getItem('userInformation'));
-
+    let _avatar = avatarSrc;
+    if (_avatar === '') _avatar = avatar.current.src;
     try {
       const res = await accountApi.updateInformation({
         username: user.username,
-        avatar: avatarSrc,
+        avatar: _avatar,
         name: inputName.current.value,
         address: inputAddress.current.value,
         phone: inputPhone.current.value,
         email: inputEmail.current.value,
       });
       if (res.result === 'SUCCESS') {
+        console.log(res);
+        localStorage.setItem('userInformation', JSON.stringify(res.infoUser));
+        fillInformation();
         window.alert('Cập nhật thông tin thành công');
-        //logoutHandler();
       }
     } catch (error) {
       console.error(error);
@@ -108,7 +112,10 @@ export default function Account({ history }) {
         }
         return response.json();
       })
-      .then((data) => setAvatarSrc(data.data.url))
+      .then((data) => {
+        setAvatarSrc(data.data.url);
+        avatar.current.src = data.data.url;
+      })
       .catch(function (error) {
         alert('error', error);
       });

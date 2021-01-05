@@ -13,6 +13,6 @@ router.post('/login', accountController.login);
 
 router.post('/register', accountController.register);
 
-router.post('/remove/:id', accountController.removeAccount);
+router.delete('/remove/:id', accountController.removeAccount);
 
 module.exports = router;

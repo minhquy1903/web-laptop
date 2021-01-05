@@ -93,9 +93,7 @@ const addProduct = async (req, res) => {
 
   const product = new productModel(reqProduct);
   product.save().then((data) => {
-    console.log(data);
-
-    res.json('SUCCESS');
+    res.json(data);
   });
 };
 const editProduct = async (req, res) => {

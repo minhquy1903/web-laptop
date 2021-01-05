@@ -26,8 +26,8 @@ const updatePassword = async (req, res) => {
 };
 
 const updateInformation = async (req, res) => {
-  const defaultAvatar = 'https://i.ibb.co/T06rD5X/avatar-default.jpg';
-  const avatar = req.body.avatar;
+  const defaultAvatar = 'https://i.ibb.co/s1PKtnW/avatar-default.png';
+  let avatar = req.body.avatar;
   if (req.body.avatar === '') avatar = defaultAvatar;
   await Account.updateOne(
     { username: req.body.username },
@@ -39,7 +39,19 @@ const updateInformation = async (req, res) => {
       email: req.body.email,
     },
   );
-  return res.status(200).json({ result: 'SUCCESS' });
+  const user = await Account.findOne({ username: req.body.username });
+
+  const infoUser = {
+    id: user._id,
+    username: user.username,
+    avatar: user.avatar,
+    name: user.name,
+    address: user.address,
+    phone: user.phone,
+    email: user.email,
+    type: user.type,
+  };
+  return res.status(200).json({ result: 'SUCCESS', infoUser: infoUser });
 };
 
 const login = async (req, res) => {
@@ -80,6 +92,9 @@ const register = async (req, res) => {
   const account = new Account({
     username: username,
     password: password,
+    name: req.body.name,
+    phone: req.body.phone,
+    address: req.body.address,
     avatar: req.body.avatar,
     email: req.body.email,
     type: req.body.type,

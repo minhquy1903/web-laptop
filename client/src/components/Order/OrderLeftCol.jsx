@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 export default function OrderLeftCol({ setUserInformation }) {
   const name = useRef(null);
@@ -6,8 +6,8 @@ export default function OrderLeftCol({ setUserInformation }) {
   const email = useRef(null);
   const address = useRef(null);
   useEffect(() => {
-    const userInformation = JSON.parse(localStorage.getItem('userInformation'));
-    console.log(userInformation);
+    let userInformation = JSON.parse(localStorage.getItem('userInformation'));
+
     if (userInformation === null) {
       userInformation = {
         name: userInformation.name,
@@ -21,7 +21,7 @@ export default function OrderLeftCol({ setUserInformation }) {
     phone.current.value = userInformation.phone;
     email.current.value = userInformation.email;
     address.current.value = userInformation.address;
-  }, []);
+  }, [setUserInformation]);
   return (
     <div className='order__col__left'>
       <div className='form'>

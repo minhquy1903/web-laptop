@@ -12,13 +12,14 @@ const Transactions = Schema({
   products: {
     id: String,
     name: String,
+    image: String,
     sku: String,
     discount: Number,
     price: Number,
     type: Array,
   },
   total: Number,
-  date: Date,
+  date: String,
   status: Boolean,
 });
 

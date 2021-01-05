@@ -23,20 +23,13 @@ const Cart = () => {
   }, [cart]);
 
   const removeItemFromCart = (_id) => {
-    console.log(_id);
-    setCart(
-      cart.filter((product) => {
-        return product._id !== _id;
-      }),
-    );
-    localStorage.setItem(
-      'cart',
-      JSON.stringify(
-        cart.filter((product) => {
-          return product._id !== _id;
-        }),
-      ),
-    );
+    let index = cart.findIndex((product) => product._id === _id);
+
+    const _cart = [...cart];
+    _cart.splice(index, 1);
+
+    setCart(_cart);
+    localStorage.setItem('cart', JSON.stringify(_cart));
   };
 
   return (
@@ -118,7 +111,7 @@ const ProductCartItem = ({ product, removeItemFromCart }) => {
           <strong> {formatMoney(product.price - product.discount)} ₫</strong>
         </div>
         {product.discount !== 0 ? (
-          <div className='price'>
+          <div className='price strike'>
             <strike>{formatMoney(product.price)} ₫</strike>
           </div>
         ) : null}

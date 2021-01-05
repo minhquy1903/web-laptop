@@ -18,11 +18,11 @@ export default function Filter({ brand, subBrand, setSubBrand }) {
         .then((data) => {
           if (brand === 'all') setCategory(data.brand);
           else {
-            const brandArr = data.brand;
-            const { subBrand } = brandArr.find(
-              (element) => element.name === brand,
-            );
-            setCategory(subBrand);
+            // const brandArr = data.brand;
+            // const { subBrand } = brandArr.find(
+            //   (element) => element.name === brand,
+            // );
+            // setCategory(subBrand);
           }
         });
     };

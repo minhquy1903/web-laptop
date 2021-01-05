@@ -15,7 +15,7 @@ app.all('*', (req, res, next) => {
   res.header('Access-Control-Allow-Credentials', 'true');
   res.header(
     'Access-Control-Allow-Methods',
-    'GET,HEAD,OPTIONS,POST,PUT,DETELE',
+    'GET,HEAD,OPTIONS,POST,PUT,DELETE',
   );
   res.header(
     'Access-Control-Allow-Headers',

@@ -21,7 +21,7 @@ const Header = () => {
     return () => {
       setLogin(false);
     };
-  }, []);
+  }, [setCart]);
 
   return (
     <div className='outer-header-container'>

@@ -22,8 +22,14 @@ export default function ProductSlideItem({ product, loading }) {
               <img alt='hinh-laptop' src={product.images[0]} />
             </Link>
             <div className='product-tag'>
-              <span className='onsale'>-{formatMoney(product.discount)} đ</span>
-              <span className='new'>Mới về</span>
+              {product.discout !== 0 ? (
+                <span className='onsale'>
+                  -{formatMoney(product.discount)} đ
+                </span>
+              ) : null}
+              {product.status === 'incoming' ? (
+                <span className='new'>Mới về</span>
+              ) : null}
             </div>
           </div>
         </div>
@@ -31,7 +37,7 @@ export default function ProductSlideItem({ product, loading }) {
         <div className='bottom-content'>
           <h3 className='product-name'>{product.name}</h3>
           <div className='sku-code'>SKU: {product.sku}</div>
-          <div className='price'>Price: {formatMoney(product.price)}đ</div>
+          <div className='price'>{formatMoney(product.price)}đ</div>
           <button className='add-to-cart-btn' onClick={() => addToCart()}>
             Thêm vào giỏ hàng
           </button>

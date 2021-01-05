@@ -22,7 +22,7 @@ const saveOrder = async (req, res) => {
 };
 
 const getTransaction = async (req, res) => {
-  const transaction = await transactionModel.findOne({
+  const transaction = await transactionModel.find({
     'customer.id': req.params.id,
   });
 

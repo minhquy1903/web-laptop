@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Main from '../Main/Main';
 import Filter from './Filter';
@@ -48,7 +48,6 @@ const ShowProduct = ({ match, location }) => {
   // console.log(subBrand);
   // console.log(location);
   // Get current product page
-  const brand = useMemo(() => match.params.brand, []);
 
   if (loading) return <div>loading ...</div>;
   const indexOfLastProduct = currentPage * productsPerPage;
@@ -63,7 +62,7 @@ const ShowProduct = ({ match, location }) => {
     <Main>
       <div className='show-product'>
         <div className='col-left'>
-          <Filter brand={brand} subBrand={subBrand} setSubBrand={setSubBrand} />
+          <Filter subBrand={subBrand} setSubBrand={setSubBrand} />
         </div>
         <div className='col-right'>
           <div className='list-product'>

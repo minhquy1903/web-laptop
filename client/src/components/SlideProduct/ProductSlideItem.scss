@@ -83,6 +83,9 @@
         margin: auto;
         margin-top: 15px;
         cursor: pointer;
+        &:hover {
+          filter: brightness(1.1);
+        }
       }
     }
 

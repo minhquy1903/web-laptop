@@ -58,6 +58,7 @@
 
         .form-update {
           width: 86%;
+          margin: auto;
           display: flex;
           flex-wrap: wrap;
           .w100 {
@@ -174,11 +175,11 @@
         color: white;
         font-size: 20px;
         background-color: #06c1d4;
+        margin: 24px 0px 0px 74px;
         cursor: pointer;
         &:hover {
           filter: brightness(1.2);
         }
-        margin: 24px 0px 0px 10px;
       }
     }
   }
