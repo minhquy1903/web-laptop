@@ -31,7 +31,10 @@ export default function CommentInput({
     if (commentText.current.value.trim() === '') return;
     const user = JSON.parse(localStorage.getItem('userInformation'));
     const id = uuid();
-    console.log(id);
+    let _date = new Date();
+    let date = `${_date.getDate()}-${
+      _date.getMonth() + 1
+    }-${_date.getFullYear()}`;
     try {
       const res = await productApi.addComment({
         id: id,
@@ -39,7 +42,7 @@ export default function CommentInput({
         name: user.name,
         avatar: user.avatar,
         content: commentText.current.value,
-        createdTime: new Date(),
+        createdTime: date,
         productID: productID,
         parentComment: parentComment,
       });

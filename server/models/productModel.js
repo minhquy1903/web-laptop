@@ -43,7 +43,7 @@ const Product = Schema({
     avatar: String,
     name: String,
     content: String,
-    createdTime: Date,
+    createdTime: String,
     parentCommentID: String,
     type: Array,
   },

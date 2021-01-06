@@ -26,9 +26,9 @@ export default function ContainerOrder() {
     if (result === false) return;
     let products = [];
     let _date = new Date();
-    let date = `${_date.getDate()}/${
+    let date = `${_date.getDate()}-${
       _date.getMonth() + 1
-    }/${_date.getFullYear()}`;
+    }-${_date.getFullYear()}`;
     cart.forEach((element) => {
       products.push({
         productid: element.id,
