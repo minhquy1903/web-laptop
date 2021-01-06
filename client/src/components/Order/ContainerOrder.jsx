@@ -22,7 +22,6 @@ export default function ContainerOrder() {
   const closeModal = () => {
     setOpenModal(false);
   };
-  console.log(userInformation);
   useEffect(() => {
     if (result === false) return;
     let products = [];
@@ -54,7 +53,7 @@ export default function ContainerOrder() {
     setOpenResultModal(true);
     setCart([]);
     localStorage.removeItem('cart');
-  }, [result, cart, total]);
+  }, [result]);
 
   return (
     <div className='container__order__wrap'>

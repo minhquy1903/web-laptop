@@ -72,6 +72,11 @@ const login = async (req, res) => {
       type: user.type,
     };
 
+    if (req.body.cms === true) {
+      if (user.type !== 1 && user.type !== 2)
+        return res.json({ result: 'FAIL' });
+    }
+
     const userJwt = { username: username, password: password };
 
     const accessToken = jwt.sign(userJwt, accessTokenSecret);
@@ -102,8 +107,8 @@ const register = async (req, res) => {
   account
     .save()
     .then((data) => {
-      console.log(data);
-      res.status(201).json({ status: 1 });
+      // console.log(data);
+      res.status(201).json(data);
     })
     .catch((err) => {
       console.error(err);
@@ -117,7 +122,7 @@ const removeAccount = async (req, res) => {
 };
 
 const getAccount = async (req, res) => {
-  const accounts = await Account.find({ type: 1 });
+  const accounts = await Account.find({ $or: [{ type: 1 }, { type: 2 }] });
   res.json(accounts);
 };
 

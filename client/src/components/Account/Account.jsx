@@ -2,6 +2,8 @@ import React, { useRef, useEffect, useState } from 'react';
 // import { useHistory } from 'react-router-dom';
 import Main from '../Main/Main';
 import SideBarInfo from './SideBarInfo';
+import Notification from '../Notification/Notification';
+import Modal from '../Modal/Modal';
 
 import './Account.scss';
 import accountApi from '../../api/accountApi';
@@ -18,6 +20,7 @@ export default function Account({ history }) {
   const [avatarSrc, setAvatarSrc] = useState('');
   const [checkConfirmPassword, setCheckConfirmPassword] = useState(null);
   const [checkCorrectPassword, setCheckCorrectPassword] = useState(null);
+  const [openModal, setOpenModal] = useState(false);
   useEffect(() => {
     fillInformation();
   }, []);
@@ -49,7 +52,7 @@ export default function Account({ history }) {
         console.log(res);
         localStorage.setItem('userInformation', JSON.stringify(res.infoUser));
         fillInformation();
-        window.alert('Cập nhật thông tin thành công');
+        setOpenModal(true);
       }
     } catch (error) {
       console.error(error);
@@ -69,7 +72,8 @@ export default function Account({ history }) {
       });
       if (res.result === 'SUCCESS') {
         setCheckConfirmPassword(null);
-        window.alert('Đổi mật khẩu thành công!!!'); // xu li response
+        setOpenModal(true);
+
         setCheckCorrectPassword(null);
         //logoutHandler();
       } else if (res.result === 'INCORRECT_PASSWORD') {
@@ -151,15 +155,30 @@ export default function Account({ history }) {
                 </div>
                 <div className='input-item'>
                   <label htmlFor='name'>Họ và tên</label>
-                  <input type='text' className='input-text' ref={inputName} />
+                  <input
+                    type='text'
+                    className='input-text'
+                    ref={inputName}
+                    tabIndex={1}
+                  />
                 </div>
                 <div className='input-item'>
                   <label htmlFor='email'>Email</label>
-                  <input type='text' className='input-text' ref={inputEmail} />
+                  <input
+                    type='text'
+                    className='input-text'
+                    ref={inputEmail}
+                    tabIndex={2}
+                  />
                 </div>
                 <div className='input-item'>
                   <label htmlFor='phone'>Số điện thoại</label>
-                  <input type='text' className='input-text' ref={inputPhone} />
+                  <input
+                    type='text'
+                    className='input-text'
+                    ref={inputPhone}
+                    tabIndex={3}
+                  />
                 </div>
                 <div className='input-item'>
                   <label htmlFor='address'>Địa chỉ</label>
@@ -167,6 +186,7 @@ export default function Account({ history }) {
                     type='text'
                     className='input-text'
                     ref={inputAddress}
+                    tabIndex={4}
                   />
                 </div>
               </div>
@@ -189,6 +209,7 @@ export default function Account({ history }) {
                     className='input-text'
                     onChange={(e) => compareNewPassword(e)}
                     ref={newPassword}
+                    tabIndex={5}
                   />
                 </div>
                 <div className='input-item '>
@@ -198,6 +219,7 @@ export default function Account({ history }) {
                     className='input-text'
                     onChange={(e) => compareConfirmPassword(e)}
                     ref={confirmPassword}
+                    tabIndex={6}
                   />
                   {checkConfirmPassword ===
                   null ? null : checkConfirmPassword === true ? (
@@ -215,6 +237,7 @@ export default function Account({ history }) {
                 <div className='input-item'>
                   <label htmlFor='password'>Nhập mật khẩu hiện tại</label>
                   <input
+                    tabIndex={7}
                     type='password'
                     className='input-text'
                     ref={currentPassword}
@@ -236,6 +259,13 @@ export default function Account({ history }) {
           </div>
         </div>
       </div>
+      <Modal openModal={openModal} closeModal={() => setOpenModal(false)}>
+        <Notification
+          type='OK'
+          content='Cập nhật thông tin thành công'
+          closeModal={() => setOpenModal(false)}
+        />
+      </Modal>
     </Main>
   );
 }

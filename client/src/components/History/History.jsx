@@ -16,7 +16,7 @@ export default function History() {
       const user = JSON.parse(localStorage.getItem('userInformation'));
       try {
         const res = await orderApi.getTransaction(user.id);
-        console.log(res);
+        console.log(res.length);
         setOrders(res);
       } catch (error) {
         console.error(error);
@@ -102,9 +102,11 @@ function Order({ order, key, index }) {
           <span>{formatMoney(order.total)} đ</span>
         </div>
         <div className='order__content'>
-          <span className={status ? 'comfirm' : 'not-comfirm'}>
-            Chưa xác nhận
-          </span>
+          {order.status ? (
+            <span className='comfirm'>Đã xác nhận</span>
+          ) : (
+            <span className='not-comfirm'>Chưa xác nhận</span>
+          )}
         </div>
 
         <div className='order__content' onClick={showDetailOrder}>
@@ -131,7 +133,7 @@ function Order({ order, key, index }) {
 }
 
 const ItemProduct = ({ product }) => {
-  console.log(product);
+  // console.log(product);
   return (
     <div className='item'>
       <div className='item__avatar'>

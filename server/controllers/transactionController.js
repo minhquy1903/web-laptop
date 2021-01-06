@@ -16,7 +16,7 @@ const saveOrder = async (req, res) => {
   });
 
   await transaction.save().then((data) => {
-    console.log(data);
+    // console.log(data);
     res.json('SUCEESS');
   });
 };
@@ -27,7 +27,7 @@ const getTransaction = async (req, res) => {
   });
 
   if (transaction === null) return res.status(400);
-
+  // console.log(transaction.length);
   res.json(transaction);
 };
 const getAllTransaction = async (req, res) => {

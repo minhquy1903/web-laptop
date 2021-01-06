@@ -23,7 +23,7 @@ export default function ProductItem({ product, loading }) {
               <img alt='hinh-laptop' src={product.images[0]} />
             </Link>
             <div className='product-tag'>
-              {product.discout !== 0 ? (
+              {product.discount !== 0 ? (
                 <span className='onsale'>
                   -{formatMoney(product.discount)} đ
                 </span>
