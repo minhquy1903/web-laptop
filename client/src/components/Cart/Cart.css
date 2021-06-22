@@ -148,6 +148,15 @@
   font-weight: 700;
 }
 
+.disable {
+  background-color: #2c95a0 !important;
+}
+.disable:hover {
+  filter: brightness(1);
+  font-weight: 1;
+  background-color: #2c95a0 !important;
+}
+
 .btn__calculation.ani {
   background-color: white;
   color: black;

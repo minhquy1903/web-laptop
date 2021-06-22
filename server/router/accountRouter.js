@@ -1,12 +1,9 @@
 const express = require('express');
-const {
-  authenticationToken,
-} = require('../authentication/authenticationToken');
 
 const router = express.Router();
 const accountController = require('../controllers/accountController');
 
-router.get('/', authenticationToken, accountController.getAccount);
+router.get('/', accountController.getAccount);
 
 router.put('/update/password', accountController.updatePassword);
 
@@ -17,9 +14,7 @@ router.post('/login', accountController.login);
 router.post('/register', accountController.register);
 
 router.delete(
-  '/remove/:id',
-  authenticationToken,
-  accountController.removeAccount,
+  '/remove/:id', accountController.removeAccount,
 );
 
 module.exports = router;

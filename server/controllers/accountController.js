@@ -27,6 +27,7 @@ const updatePassword = async (req, res) => {
 
 const updateInformation = async (req, res) => {
   const defaultAvatar = 'https://i.ibb.co/s1PKtnW/avatar-default.png';
+  console.log('hello');
   let avatar = req.body.avatar;
   if (req.body.avatar === '') avatar = defaultAvatar;
   await Account.updateOne(
@@ -59,7 +60,13 @@ const login = async (req, res) => {
   const password = req.body.password;
 
   const user = await Account.findOne({ username: username });
+
   if (user === null) return res.json({ result: 'NOT_FOUND' });
+
+  if (req.body.cms === true) {
+    if (user.type !== 1 && user.type !== 2)
+      return res.json({ result: 'FAIL' });
+  }
   if ((await bcrypt.compare(password, user.password)) === true) {
     const infoUser = {
       id: user._id,
@@ -72,10 +79,7 @@ const login = async (req, res) => {
       type: user.type,
     };
 
-    if (req.body.cms === true) {
-      if (user.type !== 1 && user.type !== 2)
-        return res.json({ result: 'FAIL' });
-    }
+
 
     const userJwt = { username: username, password: password };
 

@@ -15,25 +15,25 @@ import ShowProduct from './components/ShowProduct/ShowProduct';
 import './App.css';
 
 const App = () => {
-  return (
-    <div className='container'>
-      <CartProvider>
-        <Router>
-          <Header />
-          <Switch>
-            <Route path='/' component={HomePage} exact />
-            <Route path='/cart' component={Cart} />
-            <Route path='/account' component={Account} />
-            <Route path='/history' component={History} />
-            <Route path='/order' component={Order} />
-            <Route path='/laptop/:brand' component={ShowProduct} exact />
-            <Route path='/:productid' component={ProductDetail} />
-          </Switch>
-          <Footer />
-        </Router>
-      </CartProvider>
-    </div>
-  );
+	return (
+		<div className='container'>
+			<CartProvider>
+				<Router>
+					<Header />
+					<Switch>
+						<Route path='/' component={HomePage} exact />
+						<Route path='/cart' component={Cart} />
+						<Route path='/account' component={Account} />
+						<Route path='/history' component={History} />
+						<Route path='/order' component={Order} />
+						<Route path='/laptop/:brand' component={ShowProduct} exact />
+						<Route path='/:productid' component={ProductDetail} />
+					</Switch>
+					<Footer />
+				</Router>
+			</CartProvider>
+		</div>
+	);
 };
 
 export default App;

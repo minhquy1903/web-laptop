@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect, useRef } from 'react';
 
 import OrderLeftCol from './OrderLeftCol';
 import { CartContext } from '../Context/Context';
@@ -16,19 +16,26 @@ export default function ContainerOrder() {
   const [userInformation, setUserInformation] = useState();
   const [total, setTotal] = useState(0);
   const order = () => {
+
+
+
     setOpenModal(true);
   };
+
+
 
   const closeModal = () => {
     setOpenModal(false);
   };
   useEffect(() => {
+    console.log(userInformation);
     if (result === false) return;
+    if (userInformation.name === "" || userInformation.phone === "" || userInformation.address === "")
+      return;
     let products = [];
     let _date = new Date();
-    let date = `${_date.getDate()}-${
-      _date.getMonth() + 1
-    }-${_date.getFullYear()}`;
+    let date = `${_date.getDate()}-${_date.getMonth() + 1
+      }-${_date.getFullYear()}`;
     cart.forEach((element) => {
       products.push({
         productid: element.id,
@@ -39,7 +46,6 @@ export default function ContainerOrder() {
         price: element.price,
       });
     });
-    console.log(cart);
     const body = {
       customerid: userInformation.id,
       phone: userInformation.phone,
@@ -57,7 +63,7 @@ export default function ContainerOrder() {
 
   return (
     <div className='container__order__wrap'>
-      <OrderLeftCol setUserInformation={setUserInformation} />
+      <OrderLeftCol setUserInformation={setUserInformation} result={result} />
       <OrderRightCol cart={cart} setTotal={setTotal} />
       <div className='btn__bottom'>
         <button className='btn__order ani__btn__order' onClick={() => order()}>

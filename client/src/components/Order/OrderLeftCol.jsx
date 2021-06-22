@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 
-export default function OrderLeftCol({ setUserInformation }) {
+export default function OrderLeftCol({ setUserInformation, result }) {
   const name = useRef(null);
   const phone = useRef(null);
   const email = useRef(null);
@@ -8,20 +8,25 @@ export default function OrderLeftCol({ setUserInformation }) {
   useEffect(() => {
     let userInformation = JSON.parse(localStorage.getItem('userInformation'));
 
-    if (userInformation === null) {
-      userInformation = {
-        name: userInformation.name,
-        phone: userInformation.phone,
-        address: userInformation.address,
-      };
+    if (userInformation === null || userInformation.name === undefined) {
+      setUserInformation({
+        name: name.current.value,
+        phone: phone.current.value,
+        address: address.current.value,
+      });
+      name.current.value = "";
+      phone.current.value = "";
+      email.current.value = "";
+      address.current.value = "";
       return;
+
     }
     setUserInformation(userInformation);
     name.current.value = userInformation.name;
     phone.current.value = userInformation.phone;
     email.current.value = userInformation.email;
     address.current.value = userInformation.address;
-  }, [setUserInformation]);
+  }, [result]);
   return (
     <div className='order__col__left'>
       <div className='form'>
@@ -38,7 +43,7 @@ export default function OrderLeftCol({ setUserInformation }) {
           </div>
           <div className='col__info__12'>
             <div className='input__wrap'>
-              <input type='text' placeholder='Email' ref={email} />
+              <input type='text' placeholder='Địa chỉ' ref={email} />
             </div>
           </div>
         </div>

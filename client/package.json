@@ -3,11 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.11.5",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
-    "axios": "^0.21.0",
+    "axios": "^0.21.1",
     "dotenv": "^8.2.0",
+    "enzyme": "^3.11.0",
+    "puppeteer": "^10.0.0",
     "query-string": "^6.13.7",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
@@ -43,6 +44,8 @@
   },
   "proxy": "http://localhost:8080",
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.14.1",
+    "jest": "^26.6.0",
     "node-sass": "^4.0.0"
   }
 }

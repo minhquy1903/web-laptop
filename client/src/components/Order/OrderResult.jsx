@@ -44,7 +44,7 @@ export default function OrderResult({
         <button
           onClick={() => {
             setOpenResultModal(false);
-            window.location.href = 'http://localhost:3000/';
+            window.location.href = 'http://localhost:3000/history';
           }}>
           Xác nhận
         </button>

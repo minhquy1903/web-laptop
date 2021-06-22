@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const url = '127.0.0.1:27017';
-const database = 'laptop-test';
+const database = 'sativa';
 const options = {
   useNewUrlParser: true,
   useCreateIndex: true,

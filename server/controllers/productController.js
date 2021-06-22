@@ -1,6 +1,7 @@
 const productModel = require('../models/productModel');
 
 const getAllProduct = async (req, res) => {
+  console.log('dasdasdas');
   const products = await productModel.find({});
   res.json(products);
 };

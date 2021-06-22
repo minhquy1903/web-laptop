@@ -26,6 +26,14 @@ export default function History() {
     fetchOrder();
   }, []);
 
+  const totalMoney = () => {
+    let total = 0;
+    orders.forEach((element) => {
+      total += element.total;
+    })
+    return total;
+  }
+
   if (orders === null) return null;
 
   return (
@@ -37,12 +45,11 @@ export default function History() {
             <div className='title'>
               <h1>Lịch sử mua hàng</h1>
               <p>
-                Tổng số tiền đã giao dịch:
+                Tổng số tiền đã giao dịch:&ensp;
                 <strong className='medium'>
-                  {' '}
-                  Chưa có giá / {orders.length}{' '}
+                  {formatMoney(totalMoney())} đ&ensp;/ &ensp;{orders.length}
                 </strong>
-                đơn hàng
+                &ensp; đơn hàng
               </p>
             </div>
             <div className='order__title'>
@@ -105,8 +112,8 @@ function Order({ order, key, index }) {
           {order.status ? (
             <span className='comfirm'>Đã xác nhận</span>
           ) : (
-            <span className='not-comfirm'>Chưa xác nhận</span>
-          )}
+              <span className='not-comfirm'>Chưa xác nhận</span>
+            )}
         </div>
 
         <div className='order__content' onClick={showDetailOrder}>
